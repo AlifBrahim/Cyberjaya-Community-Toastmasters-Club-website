@@ -228,29 +228,3 @@
 <p>You can send an email to us via <a href="https://cyberjaya.toastmastersclubs.org?contactus"><span style="color:#0000ff;">Contact Us</span></a>&nbsp;page&nbsp;or send a Facebook messenger&nbsp;to us via the chat button at the bottom of the website. Alternatively, you can enter your email in the form below.</p>
 
 <div class="video-container"><iframe frameborder="0" height="650" marginheight="0" marginwidth="0" src="https://docs.google.com/forms/d/e/1FAIpQLScz1NMTNOi2jnxtopem1SFHsDaX_ojZl3fEU27Aro_KbJ12-w/viewform?embedded=true" width="600">Loading&amp;hellip;</iframe></div>
-<!-- Messenger Chat plugin Code -->
-
-<div id="fb-root"></div>
-<!-- Your Chat plugin code -->
-
-<div class="fb-customerchat" id="fb-customer-chat"></div>
-<script>
-    var chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "793705704105803");
-    chatbox.setAttribute("attribution", "biz_inbox");
-
-    window.fbAsyncInit = function() {
-        FB.init({
-            xfbml            : true,
-            version          : 'v11.0'
-        });
-    };
-
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
