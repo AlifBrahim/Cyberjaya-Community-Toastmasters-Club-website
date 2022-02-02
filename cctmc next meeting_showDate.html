@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="">
+<body>
+
+<h3>Next Meeting: Wednesday, <b id="demo"> </b>, 8:00 pm - 10:15 pm
+</h3>
+
+<script>
+    /*
+    The code automates Cyberjaya Community Toastmasters Club's next meeting date.
+    The date changes on the day after the meeting day at 12:00 AM in 2022. This
+    is beginner's code because I did this without prior knowledge of Javascript.
+    Created by Alif Ibrahim.
+    */
+
+    const today = new Date();
+    // const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const date = today.getDate();
+    let showDate;
+
+    switch (month){
+        case 2:
+            if (date <= 9) {
+                showDate = "9th February 2022";
+            }
+            else if (date <= 23) {
+                showDate = "23rd February 2022";
+            }
+            else if (date <= 28) {
+                showDate = "9th March 2022";
+            }
+            break;
+
+        case 3:
+            if (date <= 1){
+                showDate = "9th March 2022";
+            }
+            else if (date <= 2){
+                showDate = "23rd March 2022";
+            }
+            else if (date <= 3){
+                showDate = "6th April 2022";
+            }
+            break;
+        case 4:
+            if (date <= 6){
+                showDate = "6th April 2022";
+            }
+            else if (date <= 20){
+                showDate = "20th April 2022";
+            }
+            else if (date <= 30){
+                showDate = "11th May 2022";
+            }
+            break;
+        case 5:
+            if (date <= 11){
+                showDate = "11th May 2022";
+            }
+            else if (date <= 25){
+                showDate = "25th May 2022";
+            }
+            else if (date <= 31){
+                showDate = "8th June 2022";
+            }
+            break;
+        case 6:
+            if (date <= 8){
+                showDate = "8th June 2022";
+            }
+            else if (date <= 22){
+                showDate = "22nd June 2022";
+            }
+            else if (date <= 30){
+                showDate = "6th July 2022";
+            }
+            break;
+        case 7:
+            if (date <= 6){
+                showDate = "6th July 2022";
+            }
+            else if (date <= 20){
+                showDate = "20th July 2022";
+            }
+            else if (date <= 31){
+                showDate = "3rd August 2022";
+            }
+            break;
+        case 8:
+            if (date <= 3){
+                showDate = "3rd August 2022";
+            }
+            else if (date <= 17){
+                showDate = "17th August 2022";
+            }
+            else if (date <= 31){
+                showDate = "7th September 2022";
+            }
+            break;
+        case 9:
+            if (date <= 7){
+                showDate = "7th September 2022";
+            }
+            else if (date <= 21){
+                showDate = "21st September 2022";
+            }
+            else if (date <= 30){
+                showDate = "5th October 2022";
+            }
+            break;
+        case 10:
+            if (date <= 5){
+                showDate = "5th October 2022";
+            }
+            else if (date <= 19){
+                showDate = "19th October 2022";
+            }
+            else if (date <= 31){
+                showDate = "2nd November 2022";
+            }
+            break;
+        case 11:
+            if (date <= 2){
+                showDate = "2nd November 2022";
+            }
+            else if (date <= 16){
+                showDate = "16th November 2022";
+            }
+            else if (date <= 30){
+                showDate = "7th December 2022";
+            }
+            break;
+        case 12:
+            if (date <= 7){
+                showDate = "7th December 2022";
+            }
+            else if (date <= 21){
+                showDate = "21st December 2022";
+            }
+            else if (date <= 31){
+                showDate = "4th January 2023";
+            }
+            break;
+    }
+    document.getElementById("demo").innerHTML  = showDate;
+</script>
+</body>
+</html> 
