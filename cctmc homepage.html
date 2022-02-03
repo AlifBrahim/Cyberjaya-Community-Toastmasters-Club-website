@@ -1,7 +1,36 @@
+<style type="text/css">a:link {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: DarkBlue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style>
 <h3><u>Next Meeting: Wednesday, <b id="demo"> </b>, 8:00 pm - 10:15 pm</u></h3>
+
+<p><strong>Meeting ID:&nbsp;<b id="ID"> </b></strong></p>
+
+<p><strong>Passcode:&nbsp;<b id="passcode"> </b> </strong></p>
+
+<p><strong>Join Zoom Meeting: <href id="link"> </href> &nbsp;</strong></p>
 <script>
+
     /*
-    The code automates CCTMC's next meeting date. The date changes on the day after the meeting day at 12:00 AM in 2022. This
+    The code automates Cyberjaya Community Toastmasters Club's next meeting date.
+    The date changes on the day after the meeting day at 12:00 AM in 2022. This
     is beginner's code because I did this without prior knowledge of Javascript.
     Created by Alif Ibrahim.
     */
@@ -10,157 +39,241 @@
     // const year = today.getFullYear();
     const month = today.getMonth() + 1;
     const date = today.getDate();
-    let showDate;
+    var zoomLink;
+    let showDate, login = [];
 
     switch (month){
         case 2:
             if (date <= 9) {
                 showDate = "9th February 2022";
+                zoomLink = "https://us02web.zoom.us/j/83681294660?pwd=SXhmdjRTd3l6TjlRSnFZa0tid2NTQT09";
+                login[0] = [83681294660, 101202];
             }
             else if (date <= 23) {
                 showDate = "23rd February 2022";
+                zoomLink = "https://us02web.zoom.us/j/87854856519?pwd=ejRqMkZrYlpQUEhWNEcycVFiUXRkdz09";
+                login[0] = [87854856519, 303202];
             }
             else if (date <= 28) {
                 showDate = "9th March 2022";
+                zoomLink = "https://us02web.zoom.us/j/89951047689?pwd=TWJFNVkza3I4MG1WalFUZEI3b1lhQT09";
+                login[0] = [89951047689, 101202];
             }
             break;
 
         case 3:
-            if (date <= 1){
+            if (date <= 9){
                 showDate = "9th March 2022";
+                zoomLink = "https://us02web.zoom.us/j/89951047689?pwd=TWJFNVkza3I4MG1WalFUZEI3b1lhQT09";
+                login[0] = [89951047689, 101202];
             }
-            else if (date <= 2){
+            else if (date <= 23){
                 showDate = "23rd March 2022";
+                zoomLink = "https://us02web.zoom.us/j/82076587825?pwd=dGgrUTN1ZVhJZWk5UEhaU3cydktUZz09";
+                login[0] = [82076587825, 202101];
             }
-            else if (date <= 3){
+            else if (date <= 31){
                 showDate = "6th April 2022";
+                zoomLink = "https://us02web.zoom.us/j/83930984070?pwd=dzhDRitoMTNHUjJvc0JMbGZaZ2todz09";
+                login[0] = [83930984070, 404909];
             }
             break;
         case 4:
             if (date <= 6){
                 showDate = "6th April 2022";
+                zoomLink = "https://us02web.zoom.us/j/83930984070?pwd=dzhDRitoMTNHUjJvc0JMbGZaZ2todz09";
+                login[0] = [83930984070, 404909];
             }
             else if (date <= 20){
                 showDate = "20th April 2022";
+                zoomLink = "https://us02web.zoom.us/j/87474290902?pwd=OGphWGdoL056bjJaWmlRemcwV3FTdz09";
+                login[0] = [87474290902, 303201];
             }
             else if (date <= 30){
                 showDate = "11th May 2022";
+                zoomLink = "https://us02web.zoom.us/j/88059009233?pwd=aStoUjRyTEJLc01acjJkazZnOVlNZz09";
+                login[0] = [88059009233, 505606];
             }
             break;
         case 5:
             if (date <= 11){
                 showDate = "11th May 2022";
+                zoomLink = "https://us02web.zoom.us/j/88059009233?pwd=aStoUjRyTEJLc01acjJkazZnOVlNZz09";
+                login[0] = [88059009233, 505606];
             }
             else if (date <= 25){
                 showDate = "25th May 2022";
+                zoomLink = "https://us02web.zoom.us/j/83376249904?pwd=UEpueHRBZ2Evak5TUUhLZ2JpZjBxQT09";
+                login[0] = [83376249904, 606707];
             }
             else if (date <= 31){
                 showDate = "8th June 2022";
+                zoomLink = "https://us02web.zoom.us/j/85615869139?pwd=L1p3aHRhUHhzY3NDN0FEQU9HUlRyUT09";
+                login[0] = [85615869139, 101202];
             }
             break;
         case 6:
             if (date <= 8){
                 showDate = "8th June 2022";
+                zoomLink = "https://us02web.zoom.us/j/85615869139?pwd=L1p3aHRhUHhzY3NDN0FEQU9HUlRyUT09";
+                login[0] = [85615869139, 101202];
             }
             else if (date <= 22){
                 showDate = "22nd June 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 30){
                 showDate = "6th July 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             break;
         case 7:
             if (date <= 6){
-                showDate = "6th July 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 20){
                 showDate = "20th July 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 31){
                 showDate = "3rd August 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             break;
         case 8:
             if (date <= 3){
-                showDate = "3rd August 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 17){
                 showDate = "17th August 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 31){
                 showDate = "7th September 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             break;
         case 9:
             if (date <= 7){
                 showDate = "7th September 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 21){
                 showDate = "21st September 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 30){
                 showDate = "5th October 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             break;
         case 10:
             if (date <= 5){
                 showDate = "5th October 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 19){
                 showDate = "19th October 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 31){
                 showDate = "2nd November 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             break;
         case 11:
             if (date <= 2){
                 showDate = "2nd November 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 16){
                 showDate = "16th November 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 30){
                 showDate = "7th December 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             break;
         case 12:
             if (date <= 7){
                 showDate = "7th December 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 21){
                 showDate = "21st December 2022";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             else if (date <= 31){
                 showDate = "4th January 2023";
+                zoomLink = " ";
+                login[0] = [ , ];
             }
             break;
     }
+
+
+
+    function linkToZoom(zoomLink) {
+        var link = document.createElement('a');
+        link.textContent = zoomLink;
+        link.href = zoomLink;
+        document.getElementById('link').appendChild(link);
+    }
+
+    function numberWithSpaces(x) {
+        return x.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");
+    }
+
+    function numberWithSpaces2(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
     document.getElementById("demo").innerHTML  = showDate;
+
+    document.getElementById("link").href  = linkToZoom(zoomLink);
+
+    document.getElementById("ID").innerHTML  = numberWithSpaces(login[0][0]);
+    document.getElementById("passcode").innerHTML  = numberWithSpaces2(login[0][1]);
+
+
 </script>
-
-<p><strong>Join Zoom Meeting:&nbsp;</strong></p>
-
-<p><strong>Meeting ID:&nbsp;</strong></p>
-
-<p><strong>Passcode:&nbsp;</strong></p>
 
 <p dir="ltr">Check your local time <strong><a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg=Cyberjaya+Community+Toastmasters+Club+Meeting&amp;iso=20220209T20&amp;p1=122&amp;ah=2&amp;am=15" target="_blank"><span style="color:#0000ff;">here</span></a></strong></p>
 
 <p dir="ltr">Get the Meeting Agenda and meeting resources here,&nbsp;<a href="https://linktr.ee/cctmc" target="_blank"><span style="color:#0000ff;">https://linktr.ee/cctmc</span></a></p>
 <!-- Facebook Pixel Code --><script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '481726686228284');
-    fbq('track', 'PageView');
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '481726686228284');
+fbq('track', 'PageView');
 </script><noscript><img height="1" width="1" style="display:none"
-                        src="https://www.facebook.com/tr?id=481726686228284&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=481726686228284&ev=PageView&noscript=1"
 /></noscript><!-- End Facebook Pixel Code -->
 
 <h2 style="text-align: justify;"><span style="color:#ff0000;">Due to the COVID-19 pandemic, our meetings will be held online using Zoom. Join us online every 1st and 3rd Wednesday of the month from 8 pm - 10 pm. Go to the </span><a href="https://cyberjaya.toastmastersclubs.org/directions.html" target="_blank"><span style="color:#0000ff;">Meeting Info</span></a><span style="color:#ff0000;"> page for our next meeting. Ready to change your life? </span><a href="http://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;">Become a Member Now!</span></a></h2>
@@ -193,32 +306,32 @@
 <p><img alt="Icon of a person practicing their public speaking behind a podium" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-public-speaking-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp;Improve your public speaking skills</p>
 
 <p><br />
-    <br />
-    <img alt="Icon of a person running up a line graph" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-leadership-skills-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp;Build leadership skills</p>
+<br />
+<img alt="Icon of a person running up a line graph" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-leadership-skills-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp;Build leadership skills</p>
 
 <p><br />
-    <br />
-    <img alt="Icon of a person standing on a podium with confetti falling around them" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-potential-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Maximize your potential</p>
+<br />
+<img alt="Icon of a person standing on a podium with confetti falling around them" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-potential-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Maximize your potential</p>
 
 <p><br />
-    <br />
-    <img alt="Icon of a person building a pyramid" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-personal-growth-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Enjoy unlimited personal growth</p>
+<br />
+<img alt="Icon of a person building a pyramid" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-personal-growth-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Enjoy unlimited personal growth</p>
 
 <p><br />
-    <br />
-    <img alt="Icon of a person with three small headshots next to them" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-networking-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Work on networking in a small and supportive environment</p>
+<br />
+<img alt="Icon of a person with three small headshots next to them" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-networking-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Work on networking in a small and supportive environment</p>
 
 <p><br />
-    <br />
-    <img alt="Icon of a speech resting on a podium" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-presenting-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Practice writing speeches and presenting in a group setting</p>
+<br />
+<img alt="Icon of a speech resting on a podium" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-presenting-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Practice writing speeches and presenting in a group setting</p>
 
 <p><br />
-    <br />
-    <img alt="Icon of a person holding up a positive sloping graph" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-workplace-icon.svg?h=16&amp;thn=1&amp;w=16" />Gain a competitive advantage in the workplace</p>
+<br />
+<img alt="Icon of a person holding up a positive sloping graph" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-workplace-icon.svg?h=16&amp;thn=1&amp;w=16" />Gain a competitive advantage in the workplace</p>
 
 <p><br />
-    <br />
-    <img alt="Icon of a magnifying glass next to a person" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-confidence-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Build self-confidence and self-awareness</p>
+<br />
+<img alt="Icon of a magnifying glass next to a person" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-confidence-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Build self-confidence and self-awareness</p>
 
 <h2><a href="https://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;"><strong>Become our Member Now by clicking here!</strong></span></a></h2>
 
@@ -228,3 +341,29 @@
 <p>You can send an email to us via <a href="https://cyberjaya.toastmastersclubs.org?contactus"><span style="color:#0000ff;">Contact Us</span></a>&nbsp;page&nbsp;or send a Facebook messenger&nbsp;to us via the chat button at the bottom of the website. Alternatively, you can enter your email in the form below.</p>
 
 <div class="video-container"><iframe frameborder="0" height="650" marginheight="0" marginwidth="0" src="https://docs.google.com/forms/d/e/1FAIpQLScz1NMTNOi2jnxtopem1SFHsDaX_ojZl3fEU27Aro_KbJ12-w/viewform?embedded=true" width="600">Loading&amp;hellip;</iframe></div>
+<!-- Messenger Chat plugin Code -->
+
+<div id="fb-root"></div>
+<!-- Your Chat plugin code -->
+
+<div class="fb-customerchat" id="fb-customer-chat"></div>
+<script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "793705704105803");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v11.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
