@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="">
+
+
 <body>
 
 <h3>Next Meeting: Wednesday, <b id="demo"> </b>, 8:00 pm - 10:15 pm
@@ -8,7 +8,8 @@
 <p><strong>Meeting ID:&nbsp;<b id="ID"> </b></strong></p>
 <p><strong>Passcode:&nbsp; <b id="passcode"> </b> </strong></p>
 
-<p><strong>Join Zoom Meeting: <b id="link"> </b> &nbsp;</strong></p>
+<p><strong>Join Zoom Meeting: <href id="link"> </href> &nbsp;</strong></p>
+
 
 
 <script>
@@ -219,20 +220,10 @@
 
 
     function linkToZoom(zoomLink) {
-        // Create anchor element.
-        var a = document.createElement('a');
-
-        // Create the text node for anchor element.
-        var link = document.createTextNode(zoomLink);
-
-        // Append the text node to anchor element.
-        a.appendChild(link);
-
-        // Set the href property.
-        a.href = zoomLink;
-
-        // Append the anchor element to the body.
-        return document.body.appendChild(a);
+        var link = document.createElement('a');
+        link.textContent = zoomLink;
+        link.href = zoomLink;
+        document.getElementById('link').appendChild(link);
     }
 
     function numberWithSpaces(x) {
@@ -243,7 +234,10 @@
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
+    document.getElementById("demo").innerHTML  = showDate;
+
     document.getElementById("link").href  = linkToZoom(zoomLink);
+
     document.getElementById("ID").innerHTML  = numberWithSpaces(login[0][0]);
     document.getElementById("passcode").innerHTML  = numberWithSpaces2(login[0][1]);
 
@@ -251,4 +245,3 @@
 </script>
 
 </body>
-</html> 
