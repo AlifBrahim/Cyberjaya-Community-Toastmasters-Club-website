@@ -1,10 +1,339 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<style type="text/css">a:link {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:visited {
+    color: DarkBlue;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+</style>
+<h3><u>Next Meeting: Wednesday, <b id="demo"> </b>, 8:00 pm - 10:15 pm</u></h3>
 
-</body>
-</html>
+<p><strong>Meeting ID:&nbsp;<b id="ID"> </b></strong></p>
+
+<p><strong>Passcode:&nbsp;<b id="passcode"> </b> </strong></p>
+
+<p><strong>Join Zoom Meeting: <href id="link"> </href> &nbsp;</strong></p>
+
+<p dir="ltr">Check your local time <strong><href id="dateLink" target="_blank" > </href></strong></p>
+
+<script>
+
+    /*
+    The code automates Cyberjaya Community Toastmasters Club's next meeting date.
+    The date changes on the day after the meeting day at 12:00 AM in 2022. This
+    is beginner's code because I did this without prior knowledge of Javascript.
+    Created by Alif Ibrahim.
+    */
+
+    const today = new Date();
+    // const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const date = today.getDate();
+    var zoomLink, dateMeeting, monthMeeting, timeLink;
+    var timeBackLink = "T20&p1=122&ah=2&am=15", timeFrontLink = "https://www.timeanddate.com/worldclock/fixedtime.html?msg=Cyberjaya+Community+Toastmasters+Club+Meeting&iso=2022";;
+    let showDate, login = [];
+
+    switch (month){
+        case 2:
+            if (date <= 9) {
+                showDate = "9th February 2022";
+                monthMeeting = "02";
+                dateMeeting = "09";
+                zoomLink = "https://us02web.zoom.us/j/83681294660?pwd=SXhmdjRTd3l6TjlRSnFZa0tid2NTQT09";
+                login[0] = [83681294660, 101202];
+            }
+            else if (date <= 23) {
+                showDate = "23rd February 2022";
+                monthMeeting = "02";
+                dateMeeting = "23";
+                zoomLink = "https://us02web.zoom.us/j/87854856519?pwd=ejRqMkZrYlpQUEhWNEcycVFiUXRkdz09";
+                login[0] = [87854856519, 303202];
+            }
+            else if (date <= 28) {
+                showDate = "9th March 2022";
+                monthMeeting = "03";
+                dateMeeting = "09";
+                zoomLink = "https://us02web.zoom.us/j/89951047689?pwd=TWJFNVkza3I4MG1WalFUZEI3b1lhQT09";
+                login[0] = [89951047689, 101202];
+            }
+            break;
+
+        case 3:
+            if (date <= 9){
+                showDate = "9th March 2022";
+                monthMeeting = "03";
+                dateMeeting = "09";
+                zoomLink = "https://us02web.zoom.us/j/89951047689?pwd=TWJFNVkza3I4MG1WalFUZEI3b1lhQT09";
+                login[0] = [89951047689, 101202];
+            }
+            else if (date <= 23){
+                showDate = "23rd March 2022";
+                monthMeeting = "03";
+                dateMeeting = "23";
+                zoomLink = "https://us02web.zoom.us/j/82076587825?pwd=dGgrUTN1ZVhJZWk5UEhaU3cydktUZz09";
+                login[0] = [82076587825, 202101];
+            }
+            else if (date <= 31){
+                showDate = "6th April 2022";
+                monthMeeting = "04";
+                dateMeeting = "06";
+                zoomLink = "https://us02web.zoom.us/j/83930984070?pwd=dzhDRitoMTNHUjJvc0JMbGZaZ2todz09";
+                login[0] = [83930984070, 404909];
+            }
+            break;
+        case 4:
+            if (date <= 6){
+                showDate = "6th April 2022";
+                monthMeeting = "04";
+                dateMeeting = "06";
+                zoomLink = "https://us02web.zoom.us/j/83930984070?pwd=dzhDRitoMTNHUjJvc0JMbGZaZ2todz09";
+                login[0] = [83930984070, 404909];
+            }
+            else if (date <= 20){
+                showDate = "20th April 2022";
+                monthMeeting = "04";
+                dateMeeting = "20";
+                zoomLink = "https://us02web.zoom.us/j/87474290902?pwd=OGphWGdoL056bjJaWmlRemcwV3FTdz09";
+                login[0] = [87474290902, 303201];
+            }
+            else if (date <= 30){
+                showDate = "11th May 2022";
+                monthMeeting = "05";
+                dateMeeting = "11";
+                zoomLink = "https://us02web.zoom.us/j/88059009233?pwd=aStoUjRyTEJLc01acjJkazZnOVlNZz09";
+                login[0] = [88059009233, 505606];
+            }
+            break;
+        case 5:
+            if (date <= 11){
+                showDate = "11th May 2022";
+                monthMeeting = "05";
+                dateMeeting = "11";
+                zoomLink = "https://us02web.zoom.us/j/88059009233?pwd=aStoUjRyTEJLc01acjJkazZnOVlNZz09";
+                login[0] = [88059009233, 505606];
+            }
+            else if (date <= 25){
+                showDate = "25th May 2022";
+                monthMeeting = "05";
+                dateMeeting = "25";
+                zoomLink = "https://us02web.zoom.us/j/83376249904?pwd=UEpueHRBZ2Evak5TUUhLZ2JpZjBxQT09";
+                login[0] = [83376249904, 606707];
+            }
+            else if (date <= 31){
+                showDate = "8th June 2022";
+                monthMeeting = "06";
+                dateMeeting = "08";
+                zoomLink = "https://us02web.zoom.us/j/85615869139?pwd=L1p3aHRhUHhzY3NDN0FEQU9HUlRyUT09";
+                login[0] = [85615869139, 101202];
+            }
+            break;
+        case 6:
+            if (date <= 8){
+                showDate = "8th June 2022";
+                monthMeeting = "06";
+                dateMeeting = "08";
+                zoomLink = "https://us02web.zoom.us/j/85615869139?pwd=L1p3aHRhUHhzY3NDN0FEQU9HUlRyUT09";
+                login[0] = [85615869139, 101202];
+            }
+            else if (date <= 22){
+                showDate = "22nd June 2022";
+                monthMeeting = "06";
+                dateMeeting = "22";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 30){
+                showDate = "6th July 2022";
+                monthMeeting = "07";
+                dateMeeting = "06";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            break;
+        case 7:
+            if (date <= 6){
+                zoomLink = " ";
+                monthMeeting = "07";
+                dateMeeting = "06";
+                login[0] = [ , ];
+            }
+            else if (date <= 20){
+                showDate = "20th July 2022";
+                monthMeeting = "07";
+                dateMeeting = "20";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 31){
+                showDate = "3rd August 2022";
+                monthMeeting = "08";
+                dateMeeting = "03";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            break;
+        case 8:
+            if (date <= 3){
+                showDate = "3rd August 2022";
+                monthMeeting = "08";
+                dateMeeting = "03";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 17){
+                showDate = "17th August 2022";
+                monthMeeting = "08";
+                dateMeeting = "17";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 31){
+                showDate = "7th September 2022";
+                monthMeeting = "09";
+                dateMeeting = "07";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            break;
+        case 9:
+            if (date <= 7){
+                showDate = "7th September 2022";
+                monthMeeting = "09";
+                dateMeeting = "07";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 21){
+                showDate = "21st September 2022";
+                monthMeeting = "09";
+                dateMeeting = "21";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 30){
+                showDate = "5th October 2022";
+                monthMeeting = "10";
+                dateMeeting = "05";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            break;
+        case 10:
+            if (date <= 5){
+                showDate = "5th October 2022";
+                monthMeeting = "10";
+                dateMeeting = "05";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 19){
+                showDate = "19th October 2022";
+                monthMeeting = "10";
+                dateMeeting = "19";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 31){
+                showDate = "2nd November 2022";
+                monthMeeting = "11";
+                dateMeeting = "02";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            break;
+        case 11:
+            if (date <= 2){
+                showDate = "2nd November 2022";
+                monthMeeting = "11";
+                dateMeeting = "02";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 16){
+                showDate = "16th November 2022";
+                monthMeeting = "11";
+                dateMeeting = "16";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 30){
+                showDate = "7th December 2022";
+                monthMeeting = "12";
+                dateMeeting = "07";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            break;
+        case 12:
+            if (date <= 7){
+                showDate = "7th December 2022";
+                monthMeeting = "12";
+                dateMeeting = "07";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 21){
+                showDate = "21st December 2022";
+                monthMeeting = "12";
+                dateMeeting = "21";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            else if (date <= 31){
+                showDate = "4th January 2023";
+                monthMeeting = "01";
+                dateMeeting = "04";
+                zoomLink = " ";
+                login[0] = [ , ];
+            }
+            break;
+    }
+    timeLink = timeFrontLink + monthMeeting + dateMeeting + timeBackLink;
+
+    function linkToZoom(zoomLink) {
+        var link = document.createElement('a');
+        link.textContent = zoomLink;
+        link.href = zoomLink;
+        link.target = '_blank';
+        return document.getElementById('link').appendChild(link);
+    }
+
+    function linkToDate(timeLink) {
+        var link = document.createElement('a');
+        link.textContent = "here";
+        link.href = timeLink;
+        link.target = '_blank';
+        return document.getElementById('dateLink').appendChild(link);
+    }
+
+    function numberWithSpaces(x) {
+        return x.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");
+    }
+
+    function numberWithSpaces2(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
+    document.getElementById("demo").innerHTML  = showDate;
+
+    document.getElementById("link").href  = linkToZoom(zoomLink);
+
+    document.getElementById("ID").innerHTML  = numberWithSpaces(login[0][0]);
+    document.getElementById("passcode").innerHTML  = numberWithSpaces2(login[0][1]);
+    document.getElementById("dateLink").href  = linkToDate(timeLink);
+
+
+</script>
