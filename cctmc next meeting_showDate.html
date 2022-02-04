@@ -38,6 +38,20 @@ a:active {
     Created by Alif Ibrahim.
     */
 
+    /*
+    Code for Ramadan local time link.
+
+    <h3><u>Next Meeting: Wednesday, <b id="demo"> </b>, e.g 12:00 pm - 02:15 pm</u></h3>
+    var timeMeetingRamadan = e.g 12pm;
+    var timeBackLinkRamadan = "T" + timeMeeting + "&p1=122&ah=2&am=15";
+    timeLink = timeFrontLink + monthMeeting + dateMeeting + timeBackLinkRamadan;
+
+    // After Ramadan, change timeLink & also the time text in HTML back to normal:
+    timeLink = timeFrontLink + monthMeeting + dateMeeting + timeBackLink;
+    <h3><u>Next Meeting: Wednesday, <b id="demo"> </b>, 8:00 pm - 10:15 pm</u></h3>
+
+    */
+
     const today = new Date();
     // const year = today.getFullYear();
     const month = today.getMonth() + 1;
