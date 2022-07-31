@@ -67,7 +67,6 @@
     let sky;
     console.log(dateNow)
     console.log(new Date())
-    console.log(url)
     console.log("") // Space between this & the Zoom ID
 
     for(let i = 0; i < repositories.items.length; i++) {
@@ -115,6 +114,7 @@
         // TODO: Then can list all dates accordingly
         // TODO: set timeMin according to yesterday or today's date
     }
+    console.log(url)
     timeLink = timeFrontLink + year[0] + month[0] + date[0] + "T" + startTimeWithoutColon[0] + timeBackLink;
 
     // document.getElementById("date").innerHTML  = dateResult[0]; // Next Meeting: Wednesday [sky], nth Month 2022, 8:00 pm - 10:00 pm
