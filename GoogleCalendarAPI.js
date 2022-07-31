@@ -116,9 +116,9 @@
     }
     timeLink = timeFrontLink + year[0] + month[0] + date[0] + "T" + startTimeWithoutColon[0] + timeBackLink;
 
-    document.getElementById("date").innerHTML  = dateResult[0]; // Next Meeting: Wednesday [sky], nth Month 2022, 8:00 pm - 10:00 pm
-    document.getElementById("ID").innerHTML  = numberWithSpaces(zoomID[0]); // Meeting ID:
-    document.getElementById("passcode").innerHTML  = passcode[0]; // Passcode:
-    document.getElementById("link").href  = linkToZoom(zoomLink[0]); // Join Zoom Meeting:
-    document.getElementById("dateLink").href  = linkToDate(timeLink); // Check your local time here
+    // document.getElementById("date").innerHTML  = dateResult[0]; // Next Meeting: Wednesday [sky], nth Month 2022, 8:00 pm - 10:00 pm
+    // document.getElementById("ID").innerHTML  = numberWithSpaces(zoomID[0]); // Meeting ID:
+    // document.getElementById("passcode").innerHTML  = passcode[0]; // Passcode:
+    // document.getElementById("link").href  = linkToZoom(zoomLink[0]); // Join Zoom Meeting:
+    // document.getElementById("dateLink").href  = linkToDate(timeLink); // Check your local time here
 })();

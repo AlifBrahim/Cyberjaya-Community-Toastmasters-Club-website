@@ -6,5 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="nextMeetingCalculator" level="application" />
+    <orderEntry type="library" name="SelectFeeWithCurrency" level="application" />
+    <orderEntry type="library" name="GoogleCalendarAPI" level="application" />
   </component>
 </module>
