@@ -1,0 +1,468 @@
+<style>
+    .showFee {
+        background-color: #772432;
+        color: white;
+        border-style: solid;
+        border-color: black;
+        font-family: Gotham,sans-serif;
+        padding: 10px;
+    }
+</style>
+
+<h1><u><a id="Top" name="Top"></a>Steps to becoming our Toastmasters club member</u></h1>
+
+<p>To become our club member, you need to pay the fees to Toastmasters International.<br/>
+    For new members, the maximum&nbsp;fee is <strong>RM 300 for the first 6 months </strong>(RM 200 Member fee + RM 100
+    One-Time registration fee)&nbsp;and <strong>a renewal fee of RM 200 for the next 6 months </strong>(Optional, if you
+    would like to continue). However, the fee is prorated according to your starting month until the renewal time on
+    September 30th or March 30th. Please use the dropdown menu to view your fee according to whichever month you want to
+    start with.</p>
+
+<p>Check your membership fee here,</p>
+
+<p><strong>USD $7.50 is the amount for a month and $20 is the new member fee.</strong></p>
+
+<p><select id="StartDateList" onChange="calculate()">
+    <option value="Start Date">Start Date</option>
+    <option value="Jul 01, 2022">Jul 01, 2022</option>
+    <option value="Aug 01, 2022">Aug 01, 2022</option>
+    <option value="Sep 01, 2022">Sep 01, 2022</option>
+    <option value="Oct 01, 2022">Oct 01, 2022</option>
+    <option value="Nov 01, 2022">Nov 01, 2022</option>
+    <option value="Dec 01, 2022">Dec 01, 2022</option>
+</select> <!-- For 2023 --> <!--    <select>--> <!--        <option value="Jan 01, 2023">Jul 01, 2022</option>-->
+    <!--        <option value="Feb 01, 2023">Aug 01, 2022</option>-->
+    <!--        <option value="Mar 01, 2023">Sep 01, 2022</option>-->
+    <!--        <option value="Apr 01, 2023">Oct 01, 2022</option>-->
+    <!--        <option value="May 01, 2023">Nov 01, 2022</option>-->
+    <!--        <option value="June 01, 2023">Dec 01, 2022</option>-->
+    <!--        <option value="Jul 01, 2023">Jul 01, 2022</option>-->
+    <!--        <option value="Aug 01, 2023">Aug 01, 2022</option>-->
+    <!--        <option value="Sep 01, 2023">Sep 01, 2022</option>-->
+    <!--        <option value="Oct 01, 2023">Oct 01, 2022</option>-->
+    <!--        <option value="Nov 01, 2023">Nov 01, 2022</option>-->
+    <!--        <option value="Dec 01, 2023">Dec 01, 2022</option>--> <!--    </select>-->
+    <select id="EndDateList" onChange="calculate()">
+        <option value="End Date">End Date</option>
+        <option value="Mar 31, 2023">Mar 31, 2023</option>
+        <option value="Sep 30, 2022">Sep 30, 2022</option>
+    </select></p>
+
+<p class="showFee" id="ShowFee"></p>
+
+<p>The payment is made to our treasurer via <strong>online banking transfer</strong>. Here are the payment details:</p>
+
+<p><strong>Bank Account Number</strong>: 704 552 4163<br/>
+    <strong>Bank Name</strong>: CIMB Bank<br/>
+    <strong>Recipient Name</strong>: MOHD ARIFF DIN BIN M ANUAR<br/>
+    <strong>Amount</strong>: <strong id="showAmount" >.</strong></p>
+
+<script>
+    const now = new Date();
+    function calculate() {
+        var startDate = document.getElementById("StartDateList").value;
+        var endDate = document.getElementById("EndDateList").value;
+        let amount = "(Use the dropdown above to see the amount in MYR)";
+
+        if (startDate === "Jul 01, 2022" && endDate === "Sep 30, 2022") {
+            amount = "RM200";
+            document.getElementById("ShowFee").innerHTML = "USD $22.50 + $20 = $42.50" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "Aug 01, 2022" && endDate === "Sep 30, 2022") {
+            amount = "RM165";
+            document.getElementById("ShowFee").innerHTML = "USD $15 + $20 = $35" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "Sep 01, 2022" && endDate === "Sep 30, 2022") {
+            amount = "RM135"
+            document.getElementById("ShowFee").innerHTML = "USD $7.50 + $20 = $27.50" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "Oct 01, 2022" && endDate === "Mar 31, 2023") {
+            amount = "RM300";
+            document.getElementById("ShowFee").innerHTML = "USD $45 + $20 = $65" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "Nov 01, 2022" && endDate === "Mar 31, 2023") {
+            amount = "RM270";
+            document.getElementById("ShowFee").innerHTML = "USD $37.50 + $20 = $57.50" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "Dec 01, 2022" && endDate === "Mar 31, 2023") {
+            amount = "RM235"
+            document.getElementById("ShowFee").innerHTML = "USD $30 + $20 = $50" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "Jan 01, 2023" && endDate === "Mar 31, 2023") {
+            amount = "RM200";
+            document.getElementById("ShowFee").innerHTML = "USD $22.50 + $20 = $42.50" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "Feb 01, 2023" && endDate === "Mar 31, 2023") {
+            amount = "RM165";
+            document.getElementById("ShowFee").innerHTML = "USD $15 + $20 = $35" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "March 01, 2023" && endDate === "Mar 31, 2023") {
+            amount = "RM135";
+            document.getElementById("ShowFee").innerHTML = "USD $7.50 + $20 = $27.50" + "<br>" +
+                "\nTotal fee in MYR = " + amount;
+        } else if (startDate === "Jul 01, 2022" && endDate === "Mar 31, 2023") {
+            amount = "RM390";
+            document.getElementById("ShowFee").innerHTML = "USD $7.50 * 9 months = $67.50" +
+                "<br>" + "$67.50 + $20 = $87.50" + "<br>" +
+                "\nTotal fee in MYR = " + amount + "<br>" +
+                "<b>You can pay above the maximum fee to become a member until March 31st, 2023 renewal. It's worth it!</b>";
+        } else if (startDate === "Aug 01, 2022" && endDate === "Mar 31, 2023") {
+            amount = "RM365";
+            document.getElementById("ShowFee").innerHTML = "USD $7.50 * 8 months = $60" +
+                "<br>" + "$60 + $20 = $80" + "<br>" +
+                "\nTotal fee in MYR = " + amount + "<br>" +
+                "<b>You can pay above the maximum fee to become a member until March 31st, 2023 renewal. It's worth it!</b>";
+        } else if (startDate === "Sep 01, 2022" && endDate === "Mar 31, 2023") {
+            amount = "RM330"
+            document.getElementById("ShowFee").innerHTML = "USD $7.50 * 7 months = $52.50" +
+                "<br>" + "$52.50 + $20 = $72.50" + "<br>" +
+                "\nTotal fee in MYR = " + amount + "<br>" +
+                "<b>You can pay above the maximum fee to become a member until March 31st, 2023 renewal. It's worth it!</b>";
+        }
+        else{
+            document.getElementById("ShowFee").innerHTML = "";
+        }
+        document.getElementById("showAmount").innerHTML = amount;
+    }
+</script>
+
+
+<p>After payment is successful, please <strong>upload the bank-in receipt to the Google Form and fill in the Google Form
+    using this link,&nbsp;</strong><a href="https://forms.gle/BB4Frp7Li4TcerPQ6" target="_blank"><span
+        style="color:#0000ff;">https://forms.gle/BB4Frp7Li4TcerPQ6</span></a></p>
+
+<p>We will&nbsp;add your membership to Toastmasters International.&nbsp;</p>
+
+<p>Everyone is welcome to join us as a member. We&#39;ll be always happy to support you and help you to develop your
+    communication and leadership&nbsp;skills here in Toastmasters. Still not decided yet? Join our meetings as a guest
+    <strong>as many times as you wish for</strong> <span style="font-size:16px;"><strong>free</strong></span>! The club
+    meeting is held every 1st and 3rd week on&nbsp;Wednesday every month.</p>
+
+<p>For first-timers, we encourage you to join our meetings as a guest&nbsp;for free first before considering becoming a
+    member to see how Toastmasters works. Have questions? Send us an email at&nbsp;<i>contact-5257608@toastmastersclubs.org&nbsp;</i>or
+    contact the club president via WhatsApp,&nbsp;<a href="https://wa.me/601128847741" target="_blank"><span
+            style="color:#0000ff;">https://wa.me/601128847741</span></a></p>
+
+<hr/>
+<h1><u>Benefits of being a Toastmasters member</u></h1>
+
+<h3><span style="color:#ff0000;">Warning: The benefits are so big that it will change your life&nbsp;360&deg;</span>
+</h3>
+
+<h2>Confidence</h2>
+
+<p>Speaking in Toastmasters provides new challenges and plenty of opportunities to be proud of your accomplishments. The
+    more you expand your skills and talents, the more confidence you have in yourself!</p>
+
+<p>Self-confidence builds trust in others. People want to listen to someone who is confident in what they have to say
+    and how they say it.</p>
+
+<h2>Friendship</h2>
+
+<p>Toastmasters is a friendly environment where people are genuinely interested in each other. Toastmasters works
+    because it&rsquo;s welcoming, positive and supportive with each and every member playing a role in every other
+    member&rsquo;s growth and success.</p>
+
+<p>Join Toastmasters and you&rsquo;ll find you&rsquo;ve become friends with people you wouldn&rsquo;t know otherwise.
+    You get to know members and they get to know you as you learn to appreciate and encourage the best in everyone you
+    meet.</p>
+
+<h2>Encouragement</h2>
+
+<p>Every Toastmaster receives heaps of encouragement and the best part is you&rsquo;re encouraged to be your best self.
+    Every Toastmaster has inherent talents and a wonderfully unique perspective to share. Toastmasters is all about
+    encouraging yourself and others to be as awesome as you can be.</p>
+
+<p>As a Toastmaster, you share specific, positive, and constructive feedback and by doing so invest in your fellow
+    member&rsquo;s success as much as your own. You celebrate the victory of every member&rsquo;s accomplishments.</p>
+
+<p>In addition to these great benefits, there are many other awesome skills&nbsp;that&#39;ll be gained in Toastmasters
+    such as:</p>
+
+<ul>
+    <li>Becoming a more effective communicator</li>
+    <li>Improving your&nbsp;grammar and vocabulary</li>
+    <li>Exercising time management skills</li>
+    <li>Being a great listener</li>
+    <li>Learning to give specific, positive, and helpful feedback</li>
+    <li>Speaking to inspire</li>
+    <li>Speaking to entertain</li>
+    <li>Speaking to inform (without boring!)</li>
+    <li>Give presentations that don&rsquo;t suck!</li>
+    <li>Responding intelligently to impromptu questions</li>
+    <li>Leading meetings with authority and assurance</li>
+    <li>Being heard and understood when you speak</li>
+    <li>Leading by example</li>
+</ul>
+
+<h2>Pathways Learning</h2>
+
+<p>Toastmasters members have access to the Pathways learning experience, which is Toastmasters&#39;&nbsp;education
+    program that allows you to leverage over 300 practical workplace skills, including:</p>
+
+<ul>
+    <li>Interview preparation</li>
+    <li>Online meeting management</li>
+    <li>Leadership development</li>
+    <li>Project management</li>
+    <li>Conflict resolution</li>
+</ul>
+
+<p>Pathways are like your guide when you do speeches in club meetings. Members access the Pathways through Base Camp
+    which is the online gateway to Pathways.&nbsp;In Base Camp,&nbsp;you can work on projects, track your progress, and
+    view badges and certificates you&rsquo;ll earn along the way. Base Camp also features resources to help guide you,
+    including tutorials, videos, quizzes, interactive activities and more. To know more about Pathways, visit&nbsp;<a
+            href="https://www.toastmasters.org/pathways-overview" target="_blank"><span style="color:#0000ff;">https://www.toastmasters.org/pathways-overview</span></a>
+</p>
+
+<p></p>
+
+<h2>Compete in Speech Contests</h2>
+
+<p>Speech contests are a Toastmasters tradition. Each year, thousands of Toastmasters compete in the Humorous,
+    Evaluation, Tall Tales, Table Topics and International speech contests. Competition begins with club contests, and
+    winners continue competing through the Area, Division and District levels. Winners of the District level
+    International Speech Contest proceed to the&nbsp;<a
+            href="https://www.toastmasters.org/Leadership%20Central/Speech%20Contests/Region%20Quarterfinals"
+            rel="noopener noreferrer" target="_blank"><span style="color:#0000ff;">region quarterfinal</span></a>&nbsp;level.
+    Following region quarterfinals, winners advance to the semifinals for a chance to take part in the&nbsp;<a
+            href="https://www.toastmasters.org/events/2020-international-convention/world-championship-of-public-speaking"
+            target="_blank"><span
+            style="color:#0000ff;">World Championship of Public Speaking<sup>&reg;</sup></span></a></p>
+
+<p><em>Adapted from&nbsp;<a href="https://liveandlovework.com/2012/10/19/benefits-of-toastmasters/"
+                            target="_blank"><span style="color:#0000ff;">https://liveandlovework.com/2012/10/19/benefits-of-toastmasters/</span></a></em>
+</p>
+
+<hr/>
+<h2>WANT TO BECOME A BETTER COMMUNICATOR?</h2>
+
+<p>Whether you&rsquo;re a professional, a student, a stay-at-home parent, or a retiree, Toastmasters is the best way to
+    improve your communication skills. Toastmasters can help you lose the fear of public speaking and learn skills that
+    will help you be more successful in your chosen endeavor. You&rsquo;ll listen better. You&rsquo;ll more easily lead
+    teams and conduct meetings. You&rsquo;ll comfortably give and receive constructive evaluations. You already have
+    some or all of these skills. In Toastmasters, you will enhance them.</p>
+
+<p>At Toastmasters, members learn by speaking to and working with, others in a supportive environment. A typical
+    Toastmasters club is made up of 20 to 30 people who meet once a week for about an hour and a half. Each meeting
+    gives everyone an opportunity to learn and practice the skill of communication.</p>
+
+<h3>Toastmasters learn to conduct meetings.</h3>
+
+<p>Meetings often begin with a short business session which helps members learn the basics of meeting procedures.</p>
+
+<h3>Toastmasters give impromptu speeches.</h3>
+
+<p>Members present 1-2 minute impromptu speeches on assigned topics. This enables the members to have a &lsquo;comeback&rsquo;
+    in those sticky situations&rsquo; we often find ourselves in our everyday lives.</p>
+
+<h3>Toastmasters present prepared speeches.</h3>
+
+<p>At a meeting, often two to three members will present speeches based on projects from the Toastmasters International
+    Communication and Leadership Program manuals. The skills learned in these often harrowing experiences, cover topics
+    such as speech organization, voice, language, gestures, and persuasion.</p>
+
+<p>Evaluation is the foundation that Toastmasters is built on.</p>
+
+<p>Every prepared speaker is assigned an evaluator who points out the speech strengths and offers suggestions for areas
+    of improvement.</p>
+
+<h2>WHAT WILL IT DO FOR YOU?</h2>
+
+<p>Most success depends on communication. In business, each employee, whether in management, or a regular &lsquo;Joe&rsquo;,
+    faces an endless exchange of ideas, messages, and information as they deal with one another and with customers
+    day-to-day. How well they communicate can determine whether a company quickly grows into an industry leader, or
+    joins the thousands of businesses mired in mediocrity, or even bankruptcy.</p>
+
+<p>Toastmasters provides the tools that enable us to become effective communicators and leaders, all at a very low
+    cost.</p>
+
+<h3>Toastmasters training helps everyone:</h3>
+
+<ul>
+    <li>It helps us give better presentations, even if it is only a request to the boss for a raise.</li>
+    <li>It helps to hone our management skills.</li>
+    <li>It helps us to work better with fellow employees. Often listening to what they have to say will help your day
+        &lsquo;at the office&rsquo; go a little smoother.
+    </li>
+    <li>You may have invented the better mousetrap. Toastmasters will help you effectively develop and present your
+        ideas.
+    </li>
+    <li>Toastmasters offers constructive feedback, to help you make the changes that lead to better communications.</li>
+    <li>Toastmasters will help you to accept criticism more objectively.</li>
+    <li>Toastmasters produce results. Around the world, more than three million men and women of all ages and
+        occupations have benefited from Toastmasters training, and more than one thousand corporations, community
+        groups, universities, associations, and government agencies now use Toastmasters training to enhance their
+        communication skills.
+    </li>
+</ul>
+
+<p><em>Adapted from&nbsp;<a href="http://d21toastmasters.org/about/why-join-toastmasters/" target="_blank"><span
+        style="color:#0000ff;">http://d21toastmasters.org/about/why-join-toastmasters/</span></a></em></p>
+
+<hr/>
+<p></p>
+
+<h2 id="here-are-10-ways-the-club-can-propel-your-career">10 ways Toastmasters can propel your career</h2>
+
+<h3>1. Chance to improve the skill most in demand by employers</h3>
+
+<p>Hiring decision-makers consistently list communication as the No. 1 skill they seek in new hires. The candidates who
+    get jobs and get promoted are confident and are the best communicators. Toastmasters members have endless
+    opportunities to polish this skill that is so crucial for career advancement.</p>
+
+<p>Members frequently credit Toastmasters with their new jobs and promotions. Others say they&#39;ve developed the
+    confidence to take on projects they would not have felt they could handle before Toastmasters. &quot;I am more
+    confident in my job speaking at all levels,&quot; says Lisa Ward, a member of Colville Toastmasters in Colville,
+    WA.</p>
+
+<h3>2. Opportunity to polish leadership skills</h3>
+
+<p>Communication skills are a huge part of how Toastmasters helps professionals, but they go hand-in-hand with
+    leadership skills. Since 2011, Toastmasters has emphasized leadership and developed the tagline, &quot;Where leaders
+    are made.&quot;</p>
+
+<p>Toastmasters is known for its well-organized and engaging meetings. They get that way through strong leadership.
+    Members sharpen and practice leadership skills by running engaging meetings and special events.</p>
+
+<h3>3. Practice thinking on your feet</h3>
+
+<p>The comedian George Jessel once said: &quot;The human brain starts working the moment you are born and never stops
+    until you stand up to speak in public.&quot; Most of us have had the terrifying experience of freezing up when asked
+    to speak unexpectedly. In addition to delivering prepared speeches, Toastmasters members attain experience in
+    impromptu speaking during a regular meeting component called &quot;Table Topics,&quot; in which they speak for 1-2
+    minutes on a subject for which they&#39;ve had no advance preparation.</p>
+
+<p>In the workplace, the rewards of learning to speak on your feet are tremendous. You may be called upon to speak to
+    your boss, the media, customers, and other audiences with little previous notice. Developing your ability to speak
+    eloquently off the cuff means you&#39;re ready to talk about anything and respond quickly to questions instead of
+    having your mind go blank.</p>
+
+<p>And speaking of questions, can you imagine how practice in thinking and speaking on your feet can benefit you in a
+    job interview?</p>
+
+<h3>4. Experience in running time-efficient meetings</h3>
+
+<p>You have probably been in meetings that dragged on and on and went way over their allotted time. That doesn&#39;t
+    happen in Toastmasters. Toastmasters clubs meet for a set amount of time -- often an hour -- and are committed to
+    staying within that timeframe.</p>
+
+<p>&quot;Toastmasters has shown me how to keep a meeting on task,&quot; says Colville Toastmasters founder Troy
+    Anderson, &quot;so that everyone comes away without feeling frustrated from spending a lot of time and yet not
+    making any headway.&quot; Linda Evans, also of the Colville club, says, &quot;I like that the meetings are so
+    organized and only an hour long.&quot;</p>
+
+<h3>5. Even more skills and resume items</h3>
+
+<p>Beyond communication and leadership skills, the Toastmasters program specifically targets listening, critical
+    thinking, giving feedback, time management, planning and implementation, organization and delegation, facilitation,
+    mentoring, motivation, and team-building.</p>
+
+<p>Toastmasters members can choose to undertake projects such as mounting publicity and membership campaigns, planning
+    training programs, organizing special events, and serving as a top officer in a district comprising thousands of
+    members.</p>
+
+<h3>6. Attention from employers who recognize the value of Toastmasters</h3>
+
+<p>&quot;There are several types of experience that always make me take notice of a candidate,&quot; says webinar
+    specialist Susan Black (Niven). &quot;One is Toastmasters. Why Toastmasters? Because the communication, teamwork,
+    leadership, and feedback skills that every member in every club learns are all-important in virtually any job. But
+    probably the most important thing, for me, is the self-confidence that Toastmasters build along the way, and which
+    affects every aspect of their lives,&quot; says Niven, who has served in volunteer leadership positions from the
+    club level through to the Board of Directors of Toastmasters International.</p>
+
+<p>As evidence of employers that recognize Toastmasters&#39; value, more than 3,000 organizations, including the Walt
+    Disney Company, The Coca-Cola Company, and Apple Computer, sponsor in-house Toastmasters clubs as communication
+    training for employees.</p>
+
+<h3>7. A way to legitimately characterize employment gaps constructively</h3>
+
+<p>We&#39;ve always advised job seekers to try to account productively for time between jobs. Sometimes, however,
+    candidates aren&#39;t very convincing in describing vague &quot;consulting&quot; or &quot;project&quot; work. Active
+    Toastmasters members don&#39;t have that problem.</p>
+
+<p>&quot;I had been unemployed for a year and a half at the height of the economic downturn,&quot; recalls Linda
+    Eenigenburg, a metrics analyst at Aon Hewitt, Chicago. During an interview, both hiring managers, Eenigenburg says,
+    were concerned about this gap and asked her what she had been doing during that time. Without hesitation, she
+    described her extensive activities in Toastmasters International the past few years. &quot;I was hired within 24
+    hours,&quot; she says.</p>
+
+<h3>8. An inexpensive training and professional-development program</h3>
+
+<p>In most organizations, budgets for training and professional development were among the first line items slashed in
+    the economic downturn. You might be willing to invest money out of pocket for such programs, but if you were to
+    search on the Internet for programs that teach you communication, public speaking, and leadership skills, you&#39;d
+    be looking to pay hundreds, if not thousands, of dollars in most cases.</p>
+
+<p>In contrast, the dues a member pays to belong to Toastmasters can be as low as $1.77 weekly. Your employer might even
+    be willing to sponsor your membership.</p>
+
+<p>In Toastmasters, members have the opportunity to work toward educational goals, following a communication track and a
+    leadership track. The ultimate education award is Distinguished Toastmaster, which brings together both tracks. The
+    self-paced Toastmasters program proceeds in a logical sequence that helps members build skills with every speech
+    they give or leadership role they perform.</p>
+
+<p>&quot;If an individual has served in any of the volunteer leadership positions in the organization [through the
+    various levels of Toastmaster],&quot; Niven says, &quot;that individual has learned and applied amazing leadership
+    and team-building skills. As with every part of the Toastmasters International program, they have been provided with
+    excellent training for every role, and with guidance and mentoring from others.&quot;<a
+            href="https://www.toastmasters.org/Members/MembersFunctionalCategories/AboutTI/CommunicationandLeadershipTraining.aspx"
+            target="_blank"><span
+            style="color:#0000ff;">&nbsp;Learn more about Toastmasters educational programs.</span></a></p>
+
+<h3>9. Excellent networking opportunity</h3>
+
+<p>Toastmasters provides a fun yet constructive way to network with others who may become your career contacts. Heather
+    O&#39;Neill describes a Toastmasters networking experience &quot;beyond all expectations&quot; in&nbsp;<a
+            href="https://www.toastmasters.org/ToastmastersMagazine/ToastmasterArchive/2010/May/Networking-Secrets.aspx"
+            rel="nofollow noopener noreferrer" target="_blank"><span style="color:#0000ff;">an article in&nbsp;<i>Toastmaster</i>&nbsp;magazine</span></a>.
+</p>
+
+<h3>10. Regular reinforcement of learning</h3>
+
+<p>As the Toastmasters brochure, Clear Communication points out, &quot;When employees attend seminars, they quickly
+    forget what they learned; when they regularly attend Toastmasters meetings, they learn skills that stay with them
+    for a lifetime.&quot; Toastmasters clubs meet at least monthly, with many meetings weekly or twice a month, so
+    members continue to practice and develop skills.</p>
+
+<p><em>Adapted from&nbsp;</em></p>
+
+<p><em><a href="https://www.livecareer.com/resources/jobs/search/boost-career" target="_blank"><span
+        style="color:#0000ff;">https://www.livecareer.com/resources/jobs/search/boost-career</span></a></em></p>
+
+<hr/>
+<p></p>
+
+<div className="video-container">
+    <iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"
+            frameBorder="0" height="314" scrolling="no"
+            src="https://www.facebook.com/plugins/video.php?height=314&amp;href=https%3A%2F%2Fwww.facebook.com%2Ftoastmasterscyberjaya%2Fvideos%2F616445698922921%2F&amp;autoplay=true&amp;show_text=false&amp;width=560&amp;t=0"
+            style="border:none;overflow:hidden" width="560"></iframe>
+</div>
+
+<p></p>
+
+<p><a href="#top">Back to top</a></p>
+
+<p><!-- Messenger Chat plugin Code --></p>
+
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            xfbml: true,
+            version: 'v10.0'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script><!-- Your Chat plugin code -->
+
+<div attribution="page_inbox" className="fb-customerchat" page_id="793705704105803"></div>
