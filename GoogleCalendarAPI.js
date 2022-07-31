@@ -67,6 +67,7 @@
     let sky;
     console.log(dateNow)
     console.log(new Date())
+    console.log(repositories.items)
     console.log("") // Space between this & the Zoom ID
 
     for(let i = 0; i < repositories.items.length; i++) {
