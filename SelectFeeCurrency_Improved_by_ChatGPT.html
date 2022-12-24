@@ -23,28 +23,15 @@
 <p><strong>USD $7.50 is the amount for a month and $20 is the new member fee. Extra RM10 is incurred for the international transfer charge which has been included in the converted amount.</strong></p>
 <p id="USDtoMYR"></p>
 
-<p><select id="StartDateList" onChange="convertCurrency()">
-    <!-- For 2023 -->
-    <option value="Jan">Jan 01, 2023</option>
-    <option value="Feb">Feb 01, 2023</option>
-    <option value="Mar">Mar 01, 2023</option>
-    <option value="April">Apr 01, 2023</option>
-    <option value="May">May 01, 2023</option>
-    <option value="Jun">Jun 01, 2023</option>
-    <option value="Jul">Jul 01, 2023</option>
-    <option value="Aug">Aug 01, 2023</option>
-    <option value="Sep">Sep 01, 2023</option>
-    <option value="Oct">Oct 01, 2023</option>
-    <option value="Nov">Nov 01, 2023</option>
-    <option value="Dec">Dec 01, 2023</option>
-</select>
+<p>
+    <select id="StartDateList" onChange="convertCurrency()">
+    </select>
     <select id="EndDateList" onChange="convertCurrency()">
-        <option value="End Date">End Date</option>
-        <option value="Mar 31">Mar 31, 2023</option>
-        <option value="Sep 30">Sep 30, 2023</option>
-    </select></p>
+    </select>
+</p>
 
 <p class="showFee" id="ShowFee"></p>
+
 
 <p>The payment is made to our treasurer via <strong>online banking transfer</strong>. Here are the payment details:</p>
 
@@ -54,12 +41,138 @@
     <strong>Amount</strong>: <strong>RM</strong><strong id="showamountMYR" >.</strong></p>
 
 <script>
-    function convertCurrency(){
+
+    // Get the current date and year
+    const currentDate = new Date();
+    let currentYearStartDate = currentDate.getFullYear();
+    let currentYearEndDate = currentDate.getFullYear();
+    let currentYearEndDate2 = currentDate.getFullYear();
+
+    // Get the current month
+
+    if (currentDate.getMonth() >= 9 && currentDate.getDate() >= 1) { // If the current month is September or later
+        currentYearEndDate += 1;
+    }
+
+    if (currentDate.getMonth() >= 3 && currentDate.getDate() >= 1) {  // If the current month is March or later
+        currentYearEndDate2 += 1;
+    }
+
+    // Get the StartDateList and EndDateList elements
+    const StartDateList = document.getElementById('StartDateList');
+    const EndDateList = document.getElementById('EndDateList');
+
+    // Clear the options in the dropdown menus
+    StartDateList.innerHTML = '';
+    EndDateList.innerHTML = '';
+
+    // Create new options for the dropdown menus
+
+    // create the title start date in the dropdown menu
+    let option = document.createElement('option');
+    option.value = 'Start Date';
+    option.innerHTML = 'Start Date';
+
+    const janOption = document.createElement('option');
+    janOption.value = 'Jan';
+    janOption.textContent = `Jan 01, ${currentYearStartDate}`;
+    janOption.onchange = convertCurrency;
+
+    const febOption = document.createElement('option');
+    febOption.value = 'Feb';
+    febOption.textContent = `Feb 01, ${currentYearStartDate}`;
+    febOption.onchange = convertCurrency;
+
+    const marOption = document.createElement('option');
+    marOption.value = 'Mar';
+    marOption.textContent = `Mar 01, ${currentYearStartDate}`;
+    marOption.onchange = convertCurrency;
+
+    const aprOption = document.createElement('option');
+    aprOption.value = 'Apr';
+    aprOption.textContent = `Apr 01, ${currentYearStartDate}`;
+    aprOption.onchange = convertCurrency;
+
+    const mayOption = document.createElement('option');
+    mayOption.value = 'May';
+    mayOption.textContent = `May 01, ${currentYearStartDate}`;
+    mayOption.onchange = convertCurrency;
+
+    const junOption = document.createElement('option');
+    junOption.value = 'Jun';
+    junOption.textContent = `Jun 01, ${currentYearStartDate}`;
+    junOption.onchange = convertCurrency;
+
+    const julOption = document.createElement('option');
+    julOption.value = 'Jul';
+    julOption.textContent = `Jul 01, ${currentYearStartDate}`;
+    julOption.onchange = convertCurrency;
+
+    const augOption = document.createElement('option');
+    augOption.value = 'Aug';
+    augOption.textContent = `Aug 01, ${currentYearStartDate}`;
+    augOption.onchange = convertCurrency;
+
+    const sepOption = document.createElement('option');
+    sepOption.value = 'Sep';
+    sepOption.textContent = `Sep 01, ${currentYearStartDate}`;
+    sepOption.onchange = convertCurrency;
+
+    const octOption = document.createElement('option');
+    octOption.value = 'Oct';
+    octOption.textContent = `Oct 01, ${currentYearStartDate}`;
+    octOption.onchange = convertCurrency;
+
+    const novOption = document.createElement('option');
+    novOption.value = 'Nov';
+    novOption.textContent = `Nov 01, ${currentYearStartDate}`;
+    novOption.onchange = convertCurrency;
+
+    const decOption = document.createElement('option');
+    decOption.value = 'Dec';
+    decOption.textContent = `Dec 01, ${currentYearStartDate}`;
+    decOption.onchange = convertCurrency;
+
+    // create the title end date in the dropdown menu
+    let option2 = document.createElement('option');
+    option2.value = 'End Date';
+    option2.innerHTML = 'End Date';
+
+    const mar31Option = document.createElement('option');
+    mar31Option.value = 'Mar 31';
+    mar31Option.textContent = `Mar 31, ${currentYearEndDate2}`;
+    mar31Option.onchange = convertCurrency;
+
+    const sep30Option = document.createElement('option');
+    sep30Option.value = 'Sep 30';
+    sep30Option.textContent = `Sep 30, ${currentYearEndDate}`;
+    sep30Option.onchange = convertCurrency;
+
+    // Add the options to the dropdown menus
+    StartDateList.appendChild(option);
+    StartDateList.appendChild(janOption);
+    StartDateList.appendChild(febOption);
+    StartDateList.appendChild(marOption);
+    StartDateList.appendChild(aprOption);
+    StartDateList.appendChild(mayOption);
+    StartDateList.appendChild(junOption);
+    StartDateList.appendChild(julOption);
+    StartDateList.appendChild(augOption);
+    StartDateList.appendChild(sepOption);
+    StartDateList.appendChild(octOption);
+    StartDateList.appendChild(novOption);
+    StartDateList.appendChild(decOption);
+
+    EndDateList.appendChild(option2);
+    EndDateList.appendChild(mar31Option);
+    EndDateList.appendChild(sep30Option);
+
+    function convertCurrency() {
+        let amountMYR = " (Use the dropdown above to see the amount in MYR)";
+        let amountUSD, amountUSDnewMemberFee;
         var startDate = document.getElementById("StartDateList").value;
         var endDate = document.getElementById("EndDateList").value;
         var convertedMYR;
-        let amountMYR = " (Use the dropdown above to see the amountMYR in MYR)";
-        let amountUSD, amountUSDnewMemberFee;
         let MYR;
         fetch("https://openexchangerates.org/api/latest.json?app_id=8f1e953be0eb4754baa9a48324d561f0")
             .then((response) => {
@@ -69,182 +182,159 @@
                     throw new Error("NETWORK RESPONSE ERROR");
                 }
             })
-            .then((data) => { // data is the parsed JSON
+            .then((data) => {
                 MYR = (Math.round(data.rates.MYR * 100) / 100).toFixed(2);
-                document.getElementById("USDtoMYR").innerHTML = "Currently, 1 USD = " + MYR + " MYR";
-                //
-
-
+                document.getElementById("USDtoMYR").innerHTML =
+                    "Currently, 1 USD = " + MYR + " MYR";
                 let monthDiff;
                 if (startDate === "Jan" && endDate === "Mar 31") {
-                    convertedMYR = roundNearest5(MYR * 42.5);
-                    amountMYR = convertedMYR + 10;
                     monthDiff = 3;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    // amountUSDnewMemberFee + " * " + MYR + " + RM10 international bank charge = " + amountMYR;
-
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-
                 } else if (startDate === "Jan" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 87.5);
-                    amountMYR = convertedMYR + 10;
                     monthDiff = 9;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-
                 } else if (startDate === "Feb" && endDate === "Mar 31") {
-                    convertedMYR = roundNearest5(MYR * 35);
-                    amountMYR = convertedMYR + 10;
                     monthDiff = 2;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-
                 } else if (startDate === "Feb" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 35);
-                    amountMYR = convertedMYR + 10;
                     monthDiff = 8;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-
                 } else if (startDate === "Mar" && endDate === "Mar 31") {
-                    convertedMYR = roundNearest5(MYR * 27.5);
-                    amountMYR = convertedMYR + 10;
                     monthDiff = 1;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
                 } else if (startDate === "Mar" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 72.5);
-                    amountMYR = convertedMYR + 10;
                     monthDiff = 7;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-                } else if (startDate === "April" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 65);
-                    amountMYR = convertedMYR + 10;
+                }
+                else if (startDate === "Apr" && endDate === "Mar 31"){
+                    monthDiff = 12;
+                }
+                else if (startDate === "Apr" && endDate === "Sep 30") {
                     monthDiff = 6;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-                } else if (startDate === "May" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 57.5);
-                    amountMYR = convertedMYR + 10;
+                }
+                else if (startDate === "May" && endDate === "Mar 31"){
+                    monthDiff = 11;
+                }
+                else if (startDate === "May" && endDate === "Sep 30") {
                     monthDiff = 5;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-                } else if (startDate === "Jun" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 50);
-                    amountMYR = convertedMYR + 10;
+                }
+                else if (startDate === "Jun" && endDate === "Mar 31"){
+                    monthDiff = 10;
+                }
+                else if (startDate === "Jun" && endDate === "Sep 30") {
                     monthDiff = 4;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-                } else if (startDate === "Jul" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 42.5);
-                    amountMYR = convertedMYR + 10;
+                }
+                else if (startDate === "Jul" && endDate === "Mar 31"){
+                    monthDiff = 9;
+                }
+                else if (startDate === "Jul" && endDate === "Sep 30") {
                     monthDiff = 3;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-                } else if (startDate === "Aug" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 35);
-                    amountMYR = convertedMYR + 10;
+                }
+                else if (startDate === "Aug" && endDate === "Mar 31"){
+                    monthDiff = 8;
+                }
+                else if (startDate === "Aug" && endDate === "Sep 30") {
                     monthDiff = 2;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-                } else if (startDate === "Sep" && endDate === "Sep 30") {
-                    convertedMYR = roundNearest5(MYR * 27.5);
-                    amountMYR = convertedMYR + 10;
+                }
+                else if (startDate === "Sep" && endDate === "Mar 31"){
+                    monthDiff = 7;
+                }
+                else if (startDate === "Sep" && endDate === "Sep 30") {
                     monthDiff = 1;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
                 } else if (startDate === "Oct" && endDate === "Mar 31") {
-                    convertedMYR = roundNearest5(MYR * 65);
-                    amountMYR = convertedMYR + 10;
                     monthDiff = 6;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-                } else if (startDate === "Nov" && endDate === "Mar 31") {
-                    convertedMYR = roundNearest5(MYR * 57.5);
-                    amountMYR = convertedMYR + 10;
+                }
+                else if (startDate === "Oct" && endDate === "Sep 30") {
+                    monthDiff = 12;
+                }
+                else if (startDate === "Nov" && endDate === "Mar 31") {
                     monthDiff = 5;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
-                } else if (startDate === "Dec" && endDate === "Mar 31") {
-                    convertedMYR = roundNearest5(MYR * 50);
-                    amountMYR = convertedMYR + 10;
+                }
+                else if (startDate === "Nov" && endDate === "Sep 30") {
+                    monthDiff = 11;
+                }
+                else if (startDate === "Dec" && endDate === "Mar 31") {
                     monthDiff = 4;
-                    amountUSD = (7.5 * monthDiff);
-                    amountUSDnewMemberFee = amountUSD + 20;
-                    document.getElementById("ShowFee").innerHTML = "USD 7.50 * " + monthDiff + " months = USD $" + amountUSD + "<br>" +
-                        "USD $" + amountUSD.toFixed(2) + " + $20 new member fee = USD $" + amountUSDnewMemberFee.toFixed(2) + "<br>" +
-                        "\nTotal fee in MYR (rounded off)," + "<br>" +
-                        "USD $" + amountUSDnewMemberFee.toFixed(2) + " * RM" + MYR + " + RM10 international bank charge = RM" + amountMYR;
+                }
+                else if (startDate === "Dec" && endDate === "Sep 30") {
+                    monthDiff = 10;
+                }
+                else {
+                    monthDiff = 0;
+                }
 
-                } else {
+                // if monthDiff is 0, document.getElementById("ShowFee").innerHTML = "Please select a valid date range";
+                if (monthDiff === 0) {
                     document.getElementById("ShowFee").innerHTML = "Please select a valid date range";
                 }
+                else {
+                    amountUSD = 7.5 * monthDiff;
+                    amountUSDnewMemberFee = amountUSD + 20;
+                    convertedMYR = roundNearest5(MYR * amountUSDnewMemberFee);
+                    amountMYR = convertedMYR + 10;
+                }
+
+                document.getElementById("ShowFee").innerHTML =
+                    "USD 7.50 * " +
+                    monthDiff +
+                    " months = USD $" +
+                    amountUSD +
+                    "<br>" +
+                    "USD $" +
+                    amountUSD.toFixed(2) +
+                    " + $20 new member fee = USD $" +
+                    amountUSDnewMemberFee.toFixed(2) +
+                    "<br>" +
+                    "\nTotal fee in MYR (rounded off)," +
+                    "<br>" +
+                    "USD $" +
+                    amountUSDnewMemberFee.toFixed(2) +
+                    " * RM" +
+                    MYR +
+                    " + RM10 international bank charge = RM" +
+                    amountMYR;
                 document.getElementById("showamountMYR").innerHTML = amountMYR;
+                console.log(monthDiff);
+            });
 
-
-            })
     }
 
-    function roundNearest5(num) {
-        return Math.ceil(num / 5) * 5;
+    function roundNearest5(x) {
+        return Math.ceil(x / 5) * 5;
     }
+
+    function removeOptions() {
+        // Get the current month
+        const currentMonth = currentDate.getMonth();
+
+        // Check if the current month is December
+        if (currentMonth === 11) {
+            // Set the current year to the next year
+            currentYearStartDate += 1;
+
+            // Update the options for the StartDateList dropdown menu with the new year
+            janOption.textContent = `Jan 01, ${currentYearStartDate}`;
+            febOption.textContent = `Feb 01, ${currentYearStartDate}`;
+            marOption.textContent = `Mar 01, ${currentYearStartDate}`;
+            aprOption.textContent = `Apr 01, ${currentYearStartDate}`;
+            mayOption.textContent = `May 01, ${currentYearStartDate}`;
+            junOption.textContent = `Jun 01, ${currentYearStartDate}`;
+            julOption.textContent = `Jul 01, ${currentYearStartDate}`;
+            augOption.textContent = `Aug 01, ${currentYearStartDate}`;
+            sepOption.textContent = `Sep 01, ${currentYearStartDate}`;
+            octOption.textContent = `Oct 01, ${currentYearStartDate}`;
+            novOption.textContent = `Nov 01, ${currentYearStartDate}`;
+            decOption.textContent = `Dec 01, ${currentYearStartDate}`;
+        } else {
+            // Remove options from the StartDateList dropdown menu
+            // for months before the current month
+            for (let i = 0; i < currentMonth; i++) {
+                StartDateList.removeChild(StartDateList.childNodes[1]);
+            }
+        }
+    }
+
+    // Call the removeOptions function when the page loads
+    window.onload = removeOptions;
+
+    console.log("amountUSD: " + amountUSD);
+    console.log("amountUSDnewMemberFee: " + amountUSDnewMemberFee);
+    console.log("amountMYR" + amountMYR);
+
 </script>
 
 <p>After payment is successful, please <strong>upload the bank-in receipt to the Google Form and fill in the Google Form

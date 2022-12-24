@@ -8,5 +8,6 @@
     <orderEntry type="library" name="nextMeetingCalculator" level="application" />
     <orderEntry type="library" name="SelectFeeWithCurrency" level="application" />
     <orderEntry type="library" name="GoogleCalendarAPI" level="application" />
+    <orderEntry type="library" name="format-google-calendar" level="application" />
   </component>
 </module>

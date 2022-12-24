@@ -1,23 +1,386 @@
+<style type="text/css">a:link {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: DarkBlue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+li {
+    margin: 10px 0;
+}
+
+/* reset */
+#fs-frm textarea,
+#fs-frm fieldset,
+#fs-frm optgroup,
+#fs-frm #card-element:disabled {
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: bold;
+    color: inherit;
+    border: none;
+    border-radius: 0;
+    display: block;
+    width: 60%;
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+#fs-frm select{
+    font-family: inherit;
+    font-size: 100%;
+    color: inherit;
+    border: none;
+    border-radius: 0;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#fs-frm label,
+#fs-frm legend,
+#fs-frm ::placeholder {
+    font-size: .825rem;
+    margin-bottom: .5rem;
+    padding-top: .2rem;
+    display: flex;
+    align-items: baseline;
+}
+
+/* border, padding, margin, width */
+#fs-frm input,
+#fs-frm select,
+#fs-frm textarea,
+#fs-frm #card-element {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: .75em 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#fs-frm input:focus,
+#fs-frm select:focus,
+#fs-frm textarea:focus {
+    background-color: white;
+    outline-style: solid;
+    outline-width: thin;
+    outline-color: gray;
+    outline-offset: -1px;
+}
+
+#fs-frm [type="text"],
+#fs-frm [type="email"] {
+    width: 100%;
+}
+
+#fs-frm [type="button"],
+#fs-frm [type="submit"],
+#fs-frm [type="reset"] {
+    width: auto;
+    cursor: pointer;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    color: black;
+}
+
+#fs-frm [type="button"]:focus,
+#fs-frm [type="submit"]:focus,
+#fs-frm [type="reset"]:focus {
+    outline: none;
+}
+
+#fs-frm [type="submit"],
+#fs-frm [type="reset"] {
+    margin-bottom: 0;
+}
+
+#fs-frm select {
+    text-transform: none;
+}
+
+#fs-frm [type="checkbox"] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    appearance: checkbox;
+    display: inline-block;
+    width: auto;
+    margin: 0 .5em 0 0 !important;
+}
+
+#fs-frm [type="radio"] {
+    -webkit-appearance: radio;
+    -moz-appearance: radio;
+    appearance: radio;
+}
+
+/* address, locale */
+#fs-frm fieldset.locale input[name="city"],
+#fs-frm fieldset.locale select[name="state"],
+#fs-frm fieldset.locale input[name="postal-code"] {
+    display: inline;
+}
+
+#fs-frm fieldset.locale input[name="city"] {
+    width: 52%;
+}
+
+#fs-frm fieldset.locale select[name="state"],
+#fs-frm fieldset.locale input[name="postal-code"] {
+    width: 20%;
+}
+
+#fs-frm fieldset.locale input[name="city"],
+#fs-frm fieldset.locale select[name="state"] {
+    margin-right: 3%;
+}
+.formBox{
+    border-radius: 5px;
+    background-color: #A9B2B1;
+    padding: 20px;
+    font-weight: bold;
+}
+</style>
+<p></p>
+
 <h1><u>Future Meetings</u></h1>
 
 <p></p>
 
-<div attribution="page_inbox" class="fb-customerchat" page_id="793705704105803"><span style="font-size:16px;"><strong>Get the Zoom link, Meeting Agenda and Meeting Resources here,&nbsp;<a href="https://linktr.ee/cctmc" target="_blank"><span style="color:#0000ff;">https://linktr.ee/cctmc</span></a></strong></span></div>
+<p><strong>Get the Zoom link, Meeting Agenda and Meeting Resources here,&nbsp;<a href="https://linktr.ee/cctmc" target="_blank"><span style="color:#0000ff;">https://linktr.ee/cctmc</span></a></strong></p>
 
 <p><span style="font-family:Arial,Helvetica,sans-serif;"><span style="font-size:16px;"><strong>Everybody is very welcome to join our online meeting&nbsp;as a guest!&nbsp;</strong></span></span></p>
+
+<p id="futureDates"></p>
+
+<div class="formBox">
+    <form accept-charset="utf-8" action="https://formspree.io/f/xpznayzz" id="fs-frm" method="post" name="basic-rsvp-form" target="_blank">
+        <fieldset id="fs-frm-inputs"><label htmlfor="full-name">Full Name</label> <input id="full-name" name="Name" placeholder="First and Last" required="" type="text" /> <label htmlfor="email">Email</label> <input id="email" name="Email" placeholder="Enter your email" required="" type="email" /> <label htmlfor="phone">Phone Number</label> <input id="phone" name="Phone number" placeholder="Enter your phone number" required="" type="tel" /> <label htmlfor="date">Which meeting would you like to attend?</label> <select id="date" name="Meeting Date" required=""></select></fieldset>
+        <input class="formBox" type="submit" value="RSVP" /></form>
+</div>
 
 <p><iframe frameborder="0" height="650" scrolling="no" src="https://calendar.google.com/calendar/embed?height=650&amp;wkst=1&amp;bgcolor=%23f2df74&amp;ctz=Asia%2FKuala_Lumpur&amp;title=Cyberjaya%20Toastmasters%20Meetings&amp;src=cDc1ZW05NTZlM2I1cjQ5dGRwaXZnOWFnMmNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4ubWFsYXlzaWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%234285F4&amp;color=%230B8043" style="border:solid 1px #777" width="650"></iframe></p>
 
 <p><a href="http://calendar.google.com/calendar/u/1?cid=cDc1ZW05NTZlM2I1cjQ5dGRwaXZnOWFnMmNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ"><span style="color:#0000ff;">Please click here to&nbsp;add this to your calendar and set your own reminder in the setting</span></a></p>
-
-<hr />
-<script src="https://cdn.jsdelivr.net/gh/AlifBrahim/Cyberjaya-Community-Toastmasters-Club-website/GoogleCalendarAPI.min.js">
-</script>
 <script>
+    // fetch("https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU")
+    //     .then((response) => {
+    //         if (response.ok) {
+    //             return response.json();
+    //         } else {
+    //             throw new Error("NETWORK RESPONSE ERROR");
+    //         }
+    //     })
+    //     .then((data) => {
+    //     })
+
+    //Reset form
+    window.addEventListener("load", function() {
+        const form = document.getElementById('fs-frm');
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const data = new FormData(form);
+            const action = e.target.action;
+            fetch(action, {
+                method: 'POST',
+                body: data,
+            })
+                .then(() => {
+                    alert("Thank you for your RSVP. We will keep in touch with you soon");
+                    form.reset();
+                })
+        });
+    });
+
+
+    (async () => {
+        // the end nth like 1st, 2nd, 3rd, 4th, ...
+        const nth = function (d) {
+            if (d > 3 && d < 21) return 'th';
+            switch (d % 10) {
+                case 1:
+                    return "st";
+                case 2:
+                    return "nd";
+                case 3:
+                    return "rd";
+                default:
+                    return "th";
+            }
+        }
+
+        function formatAMPM(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+        }
+
+        function numberWithSpaces(x) {
+            return x.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");
+        }
+
+        function linkToZoom(zoomLink) {
+            var link = document.createElement('a');
+            link.textContent = zoomLink;
+            link.href = zoomLink;
+            link.target = '_blank';
+            return document.getElementById('link').appendChild(link);
+        }
+
+        function linkToDate(timeLink) {
+            var link = document.createElement('a');
+            link.textContent = "here";
+            link.href = timeLink;
+            link.target = '_blank';
+            return document.getElementById('dateLink').appendChild(link);
+        }
+
+        function linkToCalendar(calendarLink) {
+            var link = document.createElement('a');
+            link.href = calendarLink;
+            link.target = '_blank';
+            return document.getElementById('futureDates').appendChild(link);
+        }
+
+        // Start of Async function
+        var dateNow = new Date().toISOString();
+        const url = "https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&timeMin=" + dateNow + "&key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU";
+        const response = await fetch(url);
+        const repositories = await response.json();
+        const dateTime = [], endDateTime = [], description = [], futureDates = [], htmlLink = [], venue = [];
+        const date = [], month = [], year = [], startTime = [], startTimeWithoutColon = [], endTime = [],
+            dateParse = [], dateEndParse = [], dateResult = [], zoomLink = [], zoomID = [], passcode = [];
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var timeBackLink = "&p1=122&ah=2&am=15",
+            timeFrontLink = "https://www.timeanddate.com/worldclock/fixedtime.html?msg=Cyberjaya+Community+Toastmasters+Club+Meeting&iso=";
+        let sky;
+        var str = '<ul>'
+        console.log(dateNow)
+        console.log("") // Space between this & the Zoom ID
+
+        for (let i = 0; i < repositories.items.length; i++) {
+            dateTime[i] = repositories.items[i].start.dateTime.split("")
+            endDateTime[i] = repositories.items[i].end.dateTime.split("");
+            description[i] = repositories.items[i].description
+            htmlLink[i] = repositories.items[i].htmlLink
+            year[i] = dateTime[i][0] + dateTime[i][1] + dateTime[i][2] + dateTime[i][3]
+            month[i] = dateTime[i][5] + dateTime[i][6]
+            date[i] = dateTime[i][8] + dateTime[i][9]
+            startTime[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][13] + dateTime[i][14] + dateTime[i][15]
+            endTime[i] = endDateTime[i][11] + endDateTime[i][12] + endDateTime[i][13] + endDateTime[i][14] + endDateTime[i][15]
+            startTimeWithoutColon[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][14] + dateTime[i][15]
+            dateParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + startTime[i])
+            dateEndParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + endTime[i])
+
+            // Find skylight
+            if (dateParse[i].getHours() < 12){
+                sky = "morning"
+            }
+            else if (dateParse[i].getHours() < 16){
+                sky = "afternoon"
+            }
+            else if (dateParse[i].getHours() < 19){
+                sky = "evening"
+            }
+            else if (dateParse[i].getHours() < 24){
+                sky = "night"
+            }
+
+
+            venue[i] = repositories.items[i].location
+            // const temp = zoomLink[i].split("")
+            // zoomID[i] = temp[26] + temp[27] + temp[28] + temp[29] + temp[30] + temp[31] + temp[32] + temp[33] + temp[34] + temp[35] + temp[36];
+
+            // Find if it's hybrid or online-only
+            if (venue[i].includes("Sigma")){
+                isHybrid = " (Hybrid) "
+            }
+            else {
+                isHybrid = " (Online-only) "
+                venue[i] = "Online Only"
+            }
+            console.log("isHybrid: " + isHybrid)
+            console.log("Venue: " + venue[i])
+
+            // Find indexes of Zoom Link, ID, Passcode
+            var indexZoomLink = description[i].indexOf("Join Zoom Meeting")
+            console.log("Index Zoom link: " + indexZoomLink)
+            zoomLink[i] = description[i][indexZoomLink + 18] + description[i][indexZoomLink + 19] + description[i][indexZoomLink + 20] + description[i][indexZoomLink + 21] + description[i][indexZoomLink + 22] + description[i][indexZoomLink + 23] + description[i][indexZoomLink + 24] + description[i][indexZoomLink + 25] + description[i][indexZoomLink + 26] + description[i][indexZoomLink + 27] + description[i][indexZoomLink + 28] + description[i][indexZoomLink + 29] + description[i][indexZoomLink + 30] + description[i][indexZoomLink + 31] + description[i][indexZoomLink + 32] + description[i][indexZoomLink + 33] + description[i][indexZoomLink + 34] + description[i][indexZoomLink + 35] + description[i][indexZoomLink + 36] + description[i][indexZoomLink + 37] + description[i][indexZoomLink + 38] + description[i][indexZoomLink + 39] + description[i][indexZoomLink + 40] + description[i][indexZoomLink + 41] + description[i][indexZoomLink + 42] + description[i][indexZoomLink + 43] + description[i][indexZoomLink + 44] + description[i][indexZoomLink + 45] + description[i][indexZoomLink + 46] + description[i][indexZoomLink + 47] + description[i][indexZoomLink + 48] + description[i][indexZoomLink + 49] + description[i][indexZoomLink + 50] + description[i][indexZoomLink + 51] + description[i][indexZoomLink + 52] + description[i][indexZoomLink + 53] + description[i][indexZoomLink + 54] + description[i][indexZoomLink + 55] + description[i][indexZoomLink + 56] + description[i][indexZoomLink + 57] + description[i][indexZoomLink + 58] + description[i][indexZoomLink + 59] + description[i][indexZoomLink + 60] + description[i][indexZoomLink + 61] + description[i][indexZoomLink + 62] + description[i][indexZoomLink + 63] + description[i][indexZoomLink + 64] + description[i][indexZoomLink + 65] + description[i][indexZoomLink + 66] + description[i][indexZoomLink + 67] + description[i][indexZoomLink + 68] + description[i][indexZoomLink + 69] + description[i][indexZoomLink + 70] + description[i][indexZoomLink + 71] + description[i][indexZoomLink + 72] + description[i][indexZoomLink + 73] + description[i][indexZoomLink + 74] + description[i][indexZoomLink + 75] + description[i][indexZoomLink + 76] + description[i][indexZoomLink + 77] + description[i][indexZoomLink + 78] + description[i][indexZoomLink + 79] + description[i][indexZoomLink + 80] + description[i][indexZoomLink + 81] + description[i][indexZoomLink + 82] + description[i][indexZoomLink + 83] + description[i][indexZoomLink + 84] + description[i][indexZoomLink + 85] + description[i][indexZoomLink + 86] + description[i][indexZoomLink + 87] + description[i][indexZoomLink + 88] + description[i][indexZoomLink + 89] + description[i][indexZoomLink + 90] + description[i][indexZoomLink + 91] + description[i][indexZoomLink + 92] + description[i][indexZoomLink + 93];
+            console.log("Zoom link:" + zoomLink[i])
+
+            var indexZoomID = description[i].indexOf("Meeting ID")
+            console.log("Index Zoom ID: " + indexZoomID)
+            zoomID[i] = description[i][indexZoomID + 12] + description[i][indexZoomID + 13] + description[i][indexZoomID + 14] + description[i][indexZoomID + 15] + description[i][indexZoomID + 16] + description[i][indexZoomID + 17] + description[i][indexZoomID + 18] + description[i][indexZoomID + 19] + description[i][indexZoomID + 20] + description[i][indexZoomID + 21] + description[i][indexZoomID + 22] + description[i][indexZoomID + 23] + description[i][indexZoomID + 24]
+            console.log("Zoom ID: " + zoomID[i])
+
+            var indexPasscode = description[i].indexOf("Passcode")
+            console.log("Index Passcode: " + indexPasscode)
+            passcode[i] = description[i][indexPasscode + 10] + description[i][indexPasscode + 11] + description[i][indexPasscode + 12] + description[i][indexPasscode + 13] + description[i][indexPasscode + 14] + description[i][indexPasscode + 15];
+            console.log("Passcode: " + passcode[i])
+
+            dateResult[i] = days[dateParse[i].getDay()] + " " + sky + ", " + date[i] + nth(date[i]) + " " + months[dateParse[i].getMonth()] + " " + year[i] + ", " + formatAMPM(dateParse[i]) + " - " + formatAMPM(dateEndParse[i]) + isHybrid;
+
+            console.log(repositories.items[i])
+            console.log("dateResult: " + dateResult[i])
+            console.log("") // Space
+
+
+            futureDates[i] = date[i] + nth(date[i]) + " " + months[dateParse[i].getMonth()] + " " + year[i] + ", " + days[dateParse[i].getDay()] + " " + sky + ", " + formatAMPM(dateParse[i]) + " - " + formatAMPM(dateEndParse[i]) + isHybrid;
+
+            console.log("dateResult: " + dateResult[i])
+            console.log("") // Space
+
+            str += "<li><a href= '" + htmlLink[i] + "' target='_blank' >" + futureDates[i] + "</a>";
+
+            // For RSVP Form
+            var option = document.createElement("option");
+            option.text = futureDates[i];
+            option.value = futureDates[i];
+            var select = document.getElementById("date");
+            select.appendChild(option);
+
+        }
+
+        console.log(url)
+        timeLink = timeFrontLink + year[0] + month[0] + date[0] + "T" + startTimeWithoutColon[0] + timeBackLink;
+        // dateResult.forEach(function(date) {
+        //     str += '<li>'+ date + '';
+        // });
+        str += '</ul>';
+        document.getElementById("futureDates").innerHTML = str;
+
+
+    })();
+
 
 </script>
-
-<a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=NGJjamxwaXZkM2ljM2FuZjVmMjg2NzB1MjMgcDc1ZW05NTZlM2I1cjQ5dGRwaXZnOWFnMmNAZw&amp;tmsrc=p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
 
 <h1><u>Direction</u></h1>
 
@@ -25,3 +388,53 @@
 <script src="https://www.powr.io/powr.js?platform=html"></script>
 
 <p><a href="https://waze.to/lr/hw2829hkpy"><img alt="" src="/imageuploads/5257608/waze_PNG43.png" style="width: 30px; height: 30px;" /></a>&nbsp;Waze Direction: <a href="https://waze.to/lr/hw2829hkpy"><span style="color:#0000ff;">https://waze.to/lr/hw2829hkpy</span></a></p>
+<!-- Facebook Pixel Code --><script>
+    !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '481726686228284');
+    fbq('track', 'PageView');
+</script><noscript><img height="1" width="1" style="display:none"
+                        src="https://www.facebook.com/tr?id=481726686228284&ev=PageView&noscript=1"
+/></noscript><!-- End Facebook Pixel Code --><!-- Messenger Chat plugin Code -->
+
+<div id="fb-root"></div>
+<!-- Your Chat plugin code -->
+
+<div class="fb-customerchat" id="fb-customer-chat"></div>
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "793705704105803");
+    chatbox.setAttribute("attribution", "biz_inbox");
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            xfbml: true,
+            version: 'v11.0'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

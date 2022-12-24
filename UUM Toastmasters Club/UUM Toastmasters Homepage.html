@@ -1,0 +1,299 @@
+<style type="text/css">a:link {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: DarkBlue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style>
+<p></p>
+
+<h3><u>Next Meeting: <b id="date"> . </b></u></h3>
+
+<p><strong>Venue: <href id="location"> </href> &nbsp;</strong></p>
+
+<p><strong>Meeting ID:&nbsp;<b id="ID"> </b></strong></p>
+
+<p><strong>Passcode:&nbsp;<b id="passcode"> </b> </strong></p>
+
+<p><strong>Join Zoom Meeting: <href id="zoom"> </href> &nbsp;</strong></p>
+
+<p dir="ltr">Check your local time <strong><href id="dateLink"> </href></strong></p>
+<script>
+  // fetch("https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU")
+  //     .then((response) => {
+  //         if (response.ok) {
+  //             return response.json();
+  //         } else {
+  //             throw new Error("NETWORK RESPONSE ERROR");
+  //         }
+  //     })
+  //     .then((data) => {
+  //     })
+
+
+  (async () => {
+    // the end nth like 1st, 2nd, 3rd, 4th, ...
+    const nth = function(d) {
+      if (d > 3 && d < 21) return 'th';
+      switch (d % 10) {
+        case 1:  return "st";
+        case 2:  return "nd";
+        case 3:  return "rd";
+        default: return "th";
+      }
+    }
+
+    function formatAMPM(date) {
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0'+minutes : minutes;
+      var strTime = hours + ':' + minutes + ' ' + ampm;
+      return strTime;
+    }
+
+    function numberWithSpaces(x) {
+      return x.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");
+    }
+
+    function linkToZoom(zoomLink) {
+      var link = document.createElement('a');
+      link.textContent = zoomLink;
+      link.href = zoomLink;
+      link.target = '_blank';
+      return document.getElementById('zoom').appendChild(link);
+    }
+
+    function linkToGoogleMap(venue) {
+      var link = document.createElement('a');
+      link.textContent = venue;
+      link.href = "https://www.google.com/maps/search/?api=1&query=" + venue;
+      link.target = '_blank';
+      return document.getElementById('location').appendChild(link);
+    }
+
+    function linkToDate(timeLink) {
+      var link = document.createElement('a');
+      link.textContent = "here";
+      link.href = timeLink;
+      link.target = '_blank';
+      return document.getElementById('dateLink').appendChild(link);
+    }
+
+    // Start of Async function
+    var dateNow = new Date().toISOString();
+    const url = "https://www.googleapis.com/calendar/v3/calendars/uumtoastmasters@gmail.com/events?orderBy=startTime&singleEvents=true&timeMin=" + dateNow + "&key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU";
+    const response = await fetch(url);
+    const repositories = await response.json();
+    const dateTime = [], endDateTime = [], description = [], venue = [];
+    const date = [], month = [], year = [], startTime = [], startTimeWithoutColon = [], endTime = [], dateParse = [], dateEndParse = [], dateResult = [], zoomLink = [], zoomID = [], passcode = [];
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    var timeBackLink = "&p1=122&ah=2&am=15", timeFrontLink = "https://www.timeanddate.com/worldclock/fixedtime.html?msg=UUM+Toastmasters+Club+Meeting&iso=";
+    let sky, isHybrid;
+    console.log(dateNow)
+    console.log("") // Space between this & the Zoom ID
+
+    for(let i = 0; i < repositories.items.length; i++) {
+      dateTime[i] = repositories.items[i].start.dateTime.split("")
+      endDateTime[i] = repositories.items[i].end.dateTime.split("");
+      description[i] = repositories.items[i].description
+      year[i] = dateTime[i][0] + dateTime[i][1] + dateTime[i][2] + dateTime[i][3]
+      month[i] = dateTime[i][5] + dateTime[i][6]
+      date[i] = dateTime[i][8] + dateTime[i][9]
+      startTime[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][13] + dateTime[i][14] + dateTime[i][15]
+      endTime[i] = endDateTime[i][11] + endDateTime[i][12] + endDateTime[i][13] + endDateTime[i][14] + endDateTime[i][15]
+      startTimeWithoutColon[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][14] + dateTime[i][15]
+      dateParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + startTime[i])
+      dateEndParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + endTime[i])
+
+      // Find skylight
+      if (dateParse[i].getHours() < 12){
+        sky = "morning"
+      }
+      else if (dateParse[i].getHours() < 16){
+        sky = "afternoon"
+      }
+      else if (dateParse[i].getHours() < 19){
+        sky = "evening"
+      }
+      else if (dateParse[i].getHours() < 24){
+        sky = "night"
+      }
+
+
+      venue[i] = repositories.items[i].location
+      // const temp = zoomLink[i].split("")
+      // zoomID[i] = temp[26] + temp[27] + temp[28] + temp[29] + temp[30] + temp[31] + temp[32] + temp[33] + temp[34] + temp[35] + temp[36];
+
+      // Find if it's hybrid or online-only
+      if (venue[i].includes("Sigma")){
+        isHybrid = " (Hybrid) "
+      }
+      else {
+        isHybrid = " (Online-only) "
+        venue[i] = "Online Only"
+      }
+      console.log("isHybrid: " + isHybrid)
+      console.log("Venue: " + venue[i])
+
+      // Find indexes of Zoom Link, ID, Passcode
+      var indexZoomLink = description[i].indexOf("Join Zoom Meeting")
+      console.log("Index Zoom link: " + indexZoomLink)
+      zoomLink[i] = description[i][indexZoomLink + 18] + description[i][indexZoomLink + 19] + description[i][indexZoomLink + 20] + description[i][indexZoomLink + 21] + description[i][indexZoomLink + 22] + description[i][indexZoomLink + 23] + description[i][indexZoomLink + 24] + description[i][indexZoomLink + 25] + description[i][indexZoomLink + 26] + description[i][indexZoomLink + 27] + description[i][indexZoomLink + 28] + description[i][indexZoomLink + 29] + description[i][indexZoomLink + 30] + description[i][indexZoomLink + 31] + description[i][indexZoomLink + 32] + description[i][indexZoomLink + 33] + description[i][indexZoomLink + 34] + description[i][indexZoomLink + 35] + description[i][indexZoomLink + 36] + description[i][indexZoomLink + 37] + description[i][indexZoomLink + 38] + description[i][indexZoomLink + 39] + description[i][indexZoomLink + 40] + description[i][indexZoomLink + 41] + description[i][indexZoomLink + 42] + description[i][indexZoomLink + 43] + description[i][indexZoomLink + 44] + description[i][indexZoomLink + 45] + description[i][indexZoomLink + 46] + description[i][indexZoomLink + 47] + description[i][indexZoomLink + 48] + description[i][indexZoomLink + 49] + description[i][indexZoomLink + 50] + description[i][indexZoomLink + 51] + description[i][indexZoomLink + 52] + description[i][indexZoomLink + 53] + description[i][indexZoomLink + 54] + description[i][indexZoomLink + 55] + description[i][indexZoomLink + 56] + description[i][indexZoomLink + 57] + description[i][indexZoomLink + 58] + description[i][indexZoomLink + 59] + description[i][indexZoomLink + 60] + description[i][indexZoomLink + 61] + description[i][indexZoomLink + 62] + description[i][indexZoomLink + 63] + description[i][indexZoomLink + 64] + description[i][indexZoomLink + 65] + description[i][indexZoomLink + 66] + description[i][indexZoomLink + 67] + description[i][indexZoomLink + 68] + description[i][indexZoomLink + 69] + description[i][indexZoomLink + 70] + description[i][indexZoomLink + 71] + description[i][indexZoomLink + 72] + description[i][indexZoomLink + 73] + description[i][indexZoomLink + 74] + description[i][indexZoomLink + 75] + description[i][indexZoomLink + 76] + description[i][indexZoomLink + 77] + description[i][indexZoomLink + 78] + description[i][indexZoomLink + 79] + description[i][indexZoomLink + 80] + description[i][indexZoomLink + 81] + description[i][indexZoomLink + 82] + description[i][indexZoomLink + 83] + description[i][indexZoomLink + 84] + description[i][indexZoomLink + 85] + description[i][indexZoomLink + 86] + description[i][indexZoomLink + 87] + description[i][indexZoomLink + 88] + description[i][indexZoomLink + 89] + description[i][indexZoomLink + 90] + description[i][indexZoomLink + 91] + description[i][indexZoomLink + 92] + description[i][indexZoomLink + 93];
+      console.log("Zoom link:" + zoomLink[i])
+
+      var indexZoomID = description[i].indexOf("Meeting ID")
+      console.log("Index Zoom ID: " + indexZoomID)
+      zoomID[i] = description[i][indexZoomID + 12] + description[i][indexZoomID + 13] + description[i][indexZoomID + 14] + description[i][indexZoomID + 15] + description[i][indexZoomID + 16] + description[i][indexZoomID + 17] + description[i][indexZoomID + 18] + description[i][indexZoomID + 19] + description[i][indexZoomID + 20] + description[i][indexZoomID + 21] + description[i][indexZoomID + 22] + description[i][indexZoomID + 23] + description[i][indexZoomID + 24]
+      console.log("Zoom ID: " + zoomID[i])
+
+      var indexPasscode = description[i].indexOf("Passcode")
+      console.log("Index Passcode: " + indexPasscode)
+      passcode[i] = description[i][indexPasscode + 10] + description[i][indexPasscode + 11] + description[i][indexPasscode + 12] + description[i][indexPasscode + 13] + description[i][indexPasscode + 14] + description[i][indexPasscode + 15];
+      console.log("Passcode: " + passcode[i])
+
+      dateResult[i] = days[dateParse[i].getDay()] + " " + sky + ", " + date[i] + nth(date[i]) + " " + months[dateParse[i].getMonth()] + " " + year[i] + ", " + formatAMPM(dateParse[i]) + " - " + formatAMPM(dateEndParse[i]) + isHybrid;
+
+      console.log(repositories.items[i])
+      console.log("dateResult: " + dateResult[i])
+      console.log("") // Space
+
+      // TODO: Search Zoom link, ID, Password position & join the elements
+      // TODO: Make another array combining the data
+      // TODO: After finish, display the data into the homepage current details. Maybe can use array[0] while shifting or maybe search
+      // TODO: Then can list all dates accordingly
+      // TODO: set timeMin according to yesterday or today's date
+    }
+    console.log(url)
+    timeLink = timeFrontLink + year[0] + month[0] + date[0] + "T" + startTimeWithoutColon[0] + timeBackLink;
+
+    document.getElementById("date").innerHTML  = dateResult[0]; // Next Meeting: Wednesday [sky], nth Month 2022, 8:00 pm - 10:00 pm
+    document.getElementById("location").href  = linkToGoogleMap(venue[0]); // Venue:
+    document.getElementById("ID").innerHTML  = zoomID[0]; // Meeting ID:
+    document.getElementById("passcode").innerHTML  = passcode[0]; // Passcode:
+    document.getElementById("zoom").href  = linkToZoom(zoomLink[0]); // Join Zoom Meeting:
+    document.getElementById("dateLink").href  = linkToDate(timeLink); // Check your local time here
+  })();
+
+</script>
+
+<p dir="ltr">Get the Meeting Agenda and meeting resources here,&nbsp;<a href="https://linktr.ee/uumtoastmasters" target="_blank"><span style="color:#0000ff;">https://linktr.ee/uumtoastmasters</span></a></p>
+
+<p dir="ltr">Visit <a href="https://cyberjaya.toastmastersclubs.org/directions.html" target="_blank"><span style="color:#0000ff;">Meeting Info/Directions page</span></a> to see a list of the club&#39;s Future Meetings</p>
+<!-- Facebook Pixel Code --><script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '481726686228284');
+  fbq('track', 'PageView');
+</script><noscript><img height="1" width="1" style="display:none"
+                        src="https://www.facebook.com/tr?id=481726686228284&ev=PageView&noscript=1"
+/></noscript><!-- End Facebook Pixel Code -->
+
+<p><img alt="Default Home Page Image" src="/imageuploads/6591355/Slide1.PNG" style="display: block; margin: 0px auto; width: 119%; max-width: 660px;" /></p>
+
+<p>UUM Toastmasters Club is a public speaking club with a vision to grow Universiti Utara Malaysia (UUM) students and staff to benefit from the training of Toastmasters to become better public speakers.</p>
+
+<h1><u>How Toastmasters Works</u></h1>
+
+<p style="text-align: justify;">At Toastmasters, members learn by speaking to groups and working with others in a supportive environment. A typical Toastmasters club is made up of 20 to 30 people who meet twice a month for approximately two&nbsp;hours. Each meeting gives members several opportunities:</p>
+
+<p style="text-align: justify;">► Conduct meetings. Members learn how to plan and conduct meetings.</p>
+
+<p style="text-align: justify;">► Give impromptu speeches. Members present one- to two minutes, impromptu speeches about assigned topics.</p>
+
+<p style="text-align: justify;">► Present prepared speeches. Members present speeches based on projects from Toastmasters&rsquo; communication and leadership program. Projects cover topics such as speech organization, vocal variety, language, gestures, and persuasion.</p>
+
+<p style="text-align: justify;">► Offer constructive evaluation.&nbsp;Every speaker is assigned an evaluator who points out speech strengths and offers suggestions for improvement.</p>
+
+<h2><a href="http://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;">Join Toastmasters Now!</span></a></h2>
+
+<hr />
+<h1><u>Why should you join Toastmasters?</u></h1>
+
+<p><img alt="Icon of a person practicing their public speaking behind a podium" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-public-speaking-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp;Improve your public speaking skills</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person running up a line graph" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-leadership-skills-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp;Build leadership skills</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person standing on a podium with confetti falling around them" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-potential-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Maximize your potential</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person building a pyramid" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-personal-growth-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Enjoy unlimited personal growth</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person with three small headshots next to them" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-networking-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Work on networking in a small and supportive environment</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a speech resting on a podium" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-presenting-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Practice writing speeches and presenting in a group setting</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person holding up a positive sloping graph" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-workplace-icon.svg?h=16&amp;thn=1&amp;w=16" />Gain a competitive advantage in the workplace</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a magnifying glass next to a person" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-confidence-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Build self-confidence and self-awareness</p>
+
+<h2><a href="https://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;"><strong>Become our Member Now by clicking here!</strong></span></a></h2>
+
+<hr />
+<h1><u>How to join the meeting as a guest?</u></h1>
+
+<p>You can send an email to us via <a href="https://cyberjaya.toastmastersclubs.org?contactus"><span style="color:#0000ff;">Contact Us</span></a>&nbsp;page&nbsp;or send a Facebook messenger&nbsp;to us via the chat button at the bottom of the website. Alternatively, you can enter your email in the form below.</p>
+
+<div class="video-container"><iframe frameborder="0" height="650" marginheight="0" marginwidth="0" src="https://docs.google.com/forms/d/e/1FAIpQLScz1NMTNOi2jnxtopem1SFHsDaX_ojZl3fEU27Aro_KbJ12-w/viewform?embedded=true" width="600">Loading&amp;hellip;</iframe></div>
+<!-- Messenger Chat plugin Code -->
+
+<div id="fb-root"></div>
+<!-- Your Chat plugin code -->
+
+<div class="fb-customerchat" id="fb-customer-chat"></div>
+<script>
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox.setAttribute("page_id", "793705704105803");
+  chatbox.setAttribute("attribution", "biz_inbox");
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v11.0'
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
