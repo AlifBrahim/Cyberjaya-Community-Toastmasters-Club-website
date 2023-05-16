@@ -29,7 +29,7 @@ a:active {
 
 <p><strong>Passcode:&nbsp;<b id="passcode"> </b> </strong></p>
 
-<p><strong>Join Zoom Meeting: <href id="zoom"> </href> &nbsp;</strong></p>
+<p><strong>Join Zoom Meeting: <span id="zoom"> </span> &nbsp;</strong></p>
 
 <p dir="ltr">Check your local time <strong><href id="dateLink"> </href></strong></p>
 <script>
@@ -153,11 +153,16 @@ a:active {
             console.log("isHybrid: " + isHybrid)
             console.log("Venue: " + venue[i])
 
-            // Find indexes of Zoom Link, ID, Passcode
-            var indexZoomLink = description[i].indexOf("Join Zoom Meeting")
-            console.log("Index Zoom link: " + indexZoomLink)
-            zoomLink[i] = description[i][indexZoomLink + 18] + description[i][indexZoomLink + 19] + description[i][indexZoomLink + 20] + description[i][indexZoomLink + 21] + description[i][indexZoomLink + 22] + description[i][indexZoomLink + 23] + description[i][indexZoomLink + 24] + description[i][indexZoomLink + 25] + description[i][indexZoomLink + 26] + description[i][indexZoomLink + 27] + description[i][indexZoomLink + 28] + description[i][indexZoomLink + 29] + description[i][indexZoomLink + 30] + description[i][indexZoomLink + 31] + description[i][indexZoomLink + 32] + description[i][indexZoomLink + 33] + description[i][indexZoomLink + 34] + description[i][indexZoomLink + 35] + description[i][indexZoomLink + 36] + description[i][indexZoomLink + 37] + description[i][indexZoomLink + 38] + description[i][indexZoomLink + 39] + description[i][indexZoomLink + 40] + description[i][indexZoomLink + 41] + description[i][indexZoomLink + 42] + description[i][indexZoomLink + 43] + description[i][indexZoomLink + 44] + description[i][indexZoomLink + 45] + description[i][indexZoomLink + 46] + description[i][indexZoomLink + 47] + description[i][indexZoomLink + 48] + description[i][indexZoomLink + 49] + description[i][indexZoomLink + 50] + description[i][indexZoomLink + 51] + description[i][indexZoomLink + 52] + description[i][indexZoomLink + 53] + description[i][indexZoomLink + 54] + description[i][indexZoomLink + 55] + description[i][indexZoomLink + 56] + description[i][indexZoomLink + 57] + description[i][indexZoomLink + 58] + description[i][indexZoomLink + 59] + description[i][indexZoomLink + 60] + description[i][indexZoomLink + 61] + description[i][indexZoomLink + 62] + description[i][indexZoomLink + 63] + description[i][indexZoomLink + 64] + description[i][indexZoomLink + 65] + description[i][indexZoomLink + 66] + description[i][indexZoomLink + 67] + description[i][indexZoomLink + 68] + description[i][indexZoomLink + 69] + description[i][indexZoomLink + 70] + description[i][indexZoomLink + 71] + description[i][indexZoomLink + 72] + description[i][indexZoomLink + 73] + description[i][indexZoomLink + 74] + description[i][indexZoomLink + 75] + description[i][indexZoomLink + 76] + description[i][indexZoomLink + 77] + description[i][indexZoomLink + 78] + description[i][indexZoomLink + 79] + description[i][indexZoomLink + 80] + description[i][indexZoomLink + 81] + description[i][indexZoomLink + 82] + description[i][indexZoomLink + 83] + description[i][indexZoomLink + 84] + description[i][indexZoomLink + 85] + description[i][indexZoomLink + 86] + description[i][indexZoomLink + 87] + description[i][indexZoomLink + 88] + description[i][indexZoomLink + 89] + description[i][indexZoomLink + 90] + description[i][indexZoomLink + 91] + description[i][indexZoomLink + 92] + description[i][indexZoomLink + 93];
-            console.log("Zoom link:" + zoomLink[i])
+            // Find indexes of Zoom Link
+            var indexZoomLink = description[i].indexOf("Join Zoom Meeting");
+            var zoomLinkRegex = /https?:\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/;
+            var zoomLinkMatch = description[i].slice(indexZoomLink).match(zoomLinkRegex);
+            if (zoomLinkMatch) {
+                zoomLink[i] = zoomLinkMatch[0];
+                console.log("Zoom link:" + zoomLink[i]);
+            }
+
+
 
             var indexZoomID = description[i].indexOf("Meeting ID")
             console.log("Index Zoom ID: " + indexZoomID)
@@ -188,7 +193,7 @@ a:active {
         document.getElementById("location").href  = linkToGoogleMap(venue[0]); // Venue:
         document.getElementById("ID").innerHTML  = zoomID[0]; // Meeting ID:
         document.getElementById("passcode").innerHTML  = passcode[0]; // Passcode:
-        document.getElementById("zoom").href  = linkToZoom(zoomLink[0]); // Join Zoom Meeting:
+        linkToZoom(zoomLink[0]); // Join Zoom Meeting:
         document.getElementById("dateLink").href  = linkToDate(timeLink); // Check your local time here
     })();
 
