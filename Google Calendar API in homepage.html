@@ -111,17 +111,19 @@ a:active {
         console.log("") // Space between this & the Zoom ID
 
         for(let i = 0; i < repositories.items.length; i++) {
-            dateTime[i] = repositories.items[i].start.dateTime.split("")
-            endDateTime[i] = repositories.items[i].end.dateTime.split("");
-            description[i] = repositories.items[i].description
-            year[i] = dateTime[i][0] + dateTime[i][1] + dateTime[i][2] + dateTime[i][3]
-            month[i] = dateTime[i][5] + dateTime[i][6]
-            date[i] = dateTime[i][8] + dateTime[i][9]
-            startTime[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][13] + dateTime[i][14] + dateTime[i][15]
-            endTime[i] = endDateTime[i][11] + endDateTime[i][12] + endDateTime[i][13] + endDateTime[i][14] + endDateTime[i][15]
-            startTimeWithoutColon[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][14] + dateTime[i][15]
-            dateParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + startTime[i])
-            dateEndParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + endTime[i])
+            // Extract date and time information using Date object
+            var startDate = new Date(repositories.items[i].start.dateTime);
+            var endDate = new Date(repositories.items[i].end.dateTime);
+            description[i] = repositories.items[i].description;
+            year[i] = startDate.getFullYear();
+            month[i] = startDate.getMonth() + 1;
+            date[i] = startDate.getDate();
+            startTime[i] = startDate.toTimeString().slice(0, 5);
+            endTime[i] = endDate.toTimeString().slice(0, 5);
+            startTimeWithoutColon[i] = startTime[i].replace(':', '');
+            // Use startDate and endDate variables to simplify code
+            dateParse[i] = startDate;
+            dateEndParse[i] = endDate;
 
             // Find skylight
             if (dateParse[i].getHours() < 12){
@@ -164,15 +166,22 @@ a:active {
 
 
 
-            var indexZoomID = description[i].indexOf("Meeting ID")
-            console.log("Index Zoom ID: " + indexZoomID)
-            zoomID[i] = description[i][indexZoomID + 12] + description[i][indexZoomID + 13] + description[i][indexZoomID + 14] + description[i][indexZoomID + 15] + description[i][indexZoomID + 16] + description[i][indexZoomID + 17] + description[i][indexZoomID + 18] + description[i][indexZoomID + 19] + description[i][indexZoomID + 20] + description[i][indexZoomID + 21] + description[i][indexZoomID + 22] + description[i][indexZoomID + 23] + description[i][indexZoomID + 24]
-            console.log("Zoom ID: " + zoomID[i])
+            // Find Zoom ID using regular expression
+            var zoomIDRegex = /Meeting ID: (\d{3} \d{4} \d{4})/;
+            var zoomIDMatch = description[i].match(zoomIDRegex);
+            if (zoomIDMatch) {
+                zoomID[i] = zoomIDMatch[1];
+                console.log("Zoom ID: " + zoomID[i]);
+            }
 
-            var indexPasscode = description[i].indexOf("Passcode")
-            console.log("Index Passcode: " + indexPasscode)
-            passcode[i] = description[i][indexPasscode + 10] + description[i][indexPasscode + 11] + description[i][indexPasscode + 12] + description[i][indexPasscode + 13] + description[i][indexPasscode + 14] + description[i][indexPasscode + 15];
-            console.log("Passcode: " + passcode[i])
+            // Find Passcode using regular expression
+            var passcodeRegex = /Passcode: (\d+)/;
+            var passcodeMatch = description[i].match(passcodeRegex);
+            if (passcodeMatch) {
+                passcode[i] = passcodeMatch[1];
+                console.log("Passcode: " + passcode[i]);
+            }
+
 
             dateResult[i] = days[dateParse[i].getDay()] + " " + sky + ", " + date[i] + nth(date[i]) + " " + months[dateParse[i].getMonth()] + " " + year[i] + ", " + formatAMPM(dateParse[i]) + " - " + formatAMPM(dateEndParse[i]) + isHybrid;
 
