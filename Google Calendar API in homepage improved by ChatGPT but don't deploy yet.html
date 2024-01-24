@@ -1,0 +1,274 @@
+<style type="text/css">a:link {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: DarkBlue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style>
+<p></p>
+
+<h3><u>Next Meeting: <b id="date"> . </b></u></h3>
+
+<p><strong>Venue: <href id="location"> </href> &nbsp;</strong></p>
+
+<p><strong>Meeting ID:&nbsp;<b id="ID"> </b></strong></p>
+
+<p><strong>Passcode:&nbsp;<b id="passcode"> </b> </strong></p>
+
+<p><strong>Join Zoom Meeting: <span id="zoom"> </span> &nbsp;</strong></p>
+
+<p dir="ltr">Check your local time <strong><href id="dateLink"> </href></strong></p>
+
+<script>
+  (async () => {
+    // the end nth like 1st, 2nd, 3rd, 4th, ...
+    const nth = (d) => {
+      if (d > 3 && d < 21) return 'th';
+      switch (d % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    }
+
+    const formatAMPM = (date) => {
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      const ampm = hours >= 12 ? 'pm' : 'am';
+      hours %= 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      const strTime = hours + ':' + minutes + ' ' + ampm;
+      return strTime;
+    }
+
+    const numberWithSpaces = (x) => {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
+    const createLink = (text, href, target) => {
+      const link = document.createElement('a');
+      link.textContent = text;
+      link.href = href;
+      link.target = target;
+      return link;
+    }
+
+    const linkToZoom = (zoomLink) => {
+      const link = createLink(zoomLink, zoomLink, '_blank');
+      document.getElementById('zoom').appendChild(link);
+    }
+
+    const linkToGoogleMap = (venue) => {
+      const link = createLink(venue, `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue)}`, '_blank');
+      document.getElementById('location').appendChild(link);
+    }
+
+    const linkToDate = (timeLink) => {
+      const link = createLink('here', timeLink, '_blank');
+      document.getElementById('dateLink').appendChild(link);
+    }
+
+    // Start of Async function
+    const dateNow = new Date().toISOString();
+    const url = `https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&timeMin=${dateNow}&key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU`;
+    const response = await fetch(url);
+    const repositories = await response.json();
+
+    const {
+      items
+    } = repositories;
+    const dateResult = [];
+
+    for (let i = 0; i < items.length; i++) {
+      const {
+        start,
+        end,
+        description,
+        location
+      } = items[i];
+      const startDate = new Date(start.dateTime);
+      const endDate = new Date(end.dateTime);
+      const startTime = startDate.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric'
+      });
+      const endTime = endDate.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric'
+      });
+      const sky = (() => {
+        const hours = startDate.getHours();
+        if (hours < 12) return "morning";
+        if (hours < 16) return "afternoon";
+        if (hours < 19) return "evening";
+        return "night";
+      })();
+      const isHybrid = location.includes("Sigma") ? " (Hybrid) " : " (Online-only) ";
+      const zoomLinkMatch = description.match(/https?:\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/);
+      const zoomLink = zoomLinkMatch ? zoomLinkMatch[0] : "";
+      const zoomIDMatch = description.match(/Meeting ID: (\d{3} \d{4} \d{4})/);
+      const zoomID = zoomIDMatch ? zoomIDMatch[1] : "";
+      const passcodeMatch = description.match(/Passcode: (\d+)/);
+      const passcode = passcodeMatch ? passcodeMatch[1] : "";
+      const day = startDate.toLocaleDateString('en-US', {
+        weekday: 'long'
+      });
+      const month = startDate.toLocaleDateString('en-US', {
+        month: 'long'
+      });
+      const date = startDate.getDate();
+      const year = startDate.getFullYear();
+      const formattedDate = `${day} ${sky}, ${date}${nth(date)} ${month} ${year}, ${formatAMPM(startDate)} - ${formatAMPM(endDate)}${isHybrid}`;
+
+      console.log(items[i]);
+      console.log("dateResult: " + formattedDate);
+      console.log(""); // Space
+
+      if (i === 0) {
+        const timeLink = `https://www.timeanddate.com/worldclock/fixedtime.html?msg=Cyberjaya+Community+Toastmasters+Club+Meeting&iso=${year}${('0' + month).slice(-2)}${('0' + date).slice(-2)}T${startTime.replace(':', '')}&p1=122&ah=2&am=15`;
+
+        document.getElementById("date").innerHTML = formattedDate;
+        linkToGoogleMap(location);
+        document.getElementById("ID").innerHTML = zoomID;
+        document.getElementById("passcode").innerHTML = passcode;
+        linkToZoom(zoomLink);
+        linkToDate(timeLink);
+      }
+
+      dateResult.push(formattedDate);
+    }
+
+    console.log(url);
+  })();
+</script>
+
+
+<p dir="ltr">Get the Meeting Agenda and meeting resources here,&nbsp;<a href="https://linktr.ee/cctmc" target="_blank"><span style="color:#0000ff;">https://linktr.ee/cctmc</span></a></p>
+
+<p dir="ltr">Visit <a href="https://cyberjaya.toastmastersclubs.org/directions.html" target="_blank"><span style="color:#0000ff;">Meeting Info/Directions page</span></a> to see a list of the club&#39;s Future Meetings</p>
+<!-- Facebook Pixel Code --><script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '481726686228284');
+  fbq('track', 'PageView');
+</script><noscript><img height="1" width="1" style="display:none"
+                        src="https://www.facebook.com/tr?id=481726686228284&ev=PageView&noscript=1"
+/></noscript><!-- End Facebook Pixel Code -->
+
+<h2 style="text-align: justify;"><span style="color:#ff0000;">Due to the COVID-19 pandemic, our meetings will be held online using Zoom. Join us online every 1st and 3rd Wednesday of the month from 8 pm - 10 pm. Go to the </span><a href="https://cyberjaya.toastmastersclubs.org/directions.html" target="_blank"><span style="color:#0000ff;">Meeting Info</span></a><span style="color:#ff0000;"> page for our next meeting. Ready to change your life? </span><a href="http://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;">Become a Member Now!</span></a></h2>
+
+<hr />
+<h1>Welcome to Cyberjaya Community Toastmasters Club</h1>
+
+<p><img alt="" src="/imageuploads/5257608/cctmc_profile_pic.jpg" style="width: 119%;" /></p>
+
+<p style="text-align: justify;">Cyberjaya Community Toasmasters&nbsp;Club is a Public Speaking club with a vision to grow the Cyberjaya community and nearby city to benefit from the training of Toastmasters to become better public speakers. The&nbsp;club had&nbsp;achieved continuous achievement of&nbsp;<strong>President&#39;s Distinguished Club&nbsp;</strong>(the highest level of recognition available) since the club was chartered in 2016!&nbsp;Our meeting is on Wednesday, 1st &amp; 3rd week of every month. You are most welcome to join our meetings for free as many times as you wish! Please go to the <a href="https://cyberjaya.toastmastersclubs.org/directions.html" target="_blank"><span style="color:#0000ff;">Meeting Info</span></a> page for our upcoming meetings.</p>
+
+<hr />
+<h1><u>How Toastmasters Works</u></h1>
+
+<p style="text-align: justify;">At Toastmasters, members learn by speaking to groups and working with others in a supportive environment. A typical Toastmasters club is made up of 20 to 30 people who meet twice a month for approximately two&nbsp;hours. Each meeting gives members several opportunities:</p>
+
+<p style="text-align: justify;">► Conduct meetings. Members learn how to plan and conduct meetings.</p>
+
+<p style="text-align: justify;">► Give impromptu speeches. Members present one- to two minutes, impromptu speeches about assigned topics.</p>
+
+<p style="text-align: justify;">► Present prepared speeches. Members present speeches based on projects from Toastmasters&rsquo; communication and leadership program. Projects cover topics such as speech organization, vocal variety, language, gestures, and persuasion.</p>
+
+<p style="text-align: justify;">► Offer constructive evaluation.&nbsp;Every speaker is assigned an evaluator who points out speech strengths and offers suggestions for improvement.</p>
+
+<h2><a href="http://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;">Join Toastmasters Now!</span></a></h2>
+
+<hr />
+<h1><u>Why should you join Toastmasters?</u></h1>
+
+<p><img alt="Icon of a person practicing their public speaking behind a podium" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-public-speaking-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp;Improve your public speaking skills</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person running up a line graph" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-leadership-skills-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp;Build leadership skills</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person standing on a podium with confetti falling around them" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-potential-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Maximize your potential</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person building a pyramid" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-personal-growth-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Enjoy unlimited personal growth</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person with three small headshots next to them" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-networking-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Work on networking in a small and supportive environment</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a speech resting on a podium" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-presenting-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Practice writing speeches and presenting in a group setting</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a person holding up a positive sloping graph" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-workplace-icon.svg?h=16&amp;thn=1&amp;w=16" />Gain a competitive advantage in the workplace</p>
+
+<p><br />
+  <br />
+  <img alt="Icon of a magnifying glass next to a person" src="https://toastmasterscdn.azureedge.net/medias/images/prospectivememberpage/toastmasters-confidence-icon.svg?h=16&amp;thn=1&amp;w=16" />&nbsp; Build self-confidence and self-awareness</p>
+
+<h2><a href="https://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;"><strong>Become our Member Now by clicking here!</strong></span></a></h2>
+
+<hr />
+<h1><u>How to join the meeting as a guest?</u></h1>
+
+<p>You can send an email to us via <a href="https://cyberjaya.toastmastersclubs.org?contactus"><span style="color:#0000ff;">Contact Us</span></a>&nbsp;page&nbsp;or send a Facebook messenger&nbsp;to us via the chat button at the bottom of the website. Alternatively, you can enter your email in the form below.</p>
+
+<div class="video-container"><iframe frameborder="0" height="650" marginheight="0" marginwidth="0" src="https://docs.google.com/forms/d/e/1FAIpQLScz1NMTNOi2jnxtopem1SFHsDaX_ojZl3fEU27Aro_KbJ12-w/viewform?embedded=true" width="600">Loading&amp;hellip;</iframe></div>
+<!-- Messenger Chat plugin Code -->
+
+<div id="fb-root"></div>
+<!-- Your Chat plugin code -->
+
+<div class="fb-customerchat" id="fb-customer-chat"></div>
+<script>
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox.setAttribute("page_id", "793705704105803");
+  chatbox.setAttribute("attribution", "biz_inbox");
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v11.0'
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>

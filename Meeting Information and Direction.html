@@ -1,4 +1,8 @@
-<style type="text/css">a:link {
+<style type="text/css">#accesslog{
+    display: none
+}
+
+a:link {
     color: blue;
     background-color: transparent;
     text-decoration: none;
@@ -174,44 +178,18 @@ li {
 
 <p id="futureDates"></p>
 
-<div class="formBox">
-    <form accept-charset="utf-8" action="https://formspree.io/f/xpznayzz" id="fs-frm" method="post" name="basic-rsvp-form" target="_blank">
-        <fieldset id="fs-frm-inputs"><label htmlfor="full-name">Full Name</label> <input id="full-name" name="Name" placeholder="First and Last" required="" type="text" /> <label htmlfor="email">Email</label> <input id="email" name="Email" placeholder="Enter your email" required="" type="email" /> <label htmlfor="phone">Phone Number</label> <input id="phone" name="Phone number" placeholder="Enter your phone number" required="" type="tel" /> <label htmlfor="date">Which meeting would you like to attend?</label> <select id="date" name="Meeting Date" required=""></select></fieldset>
-        <input class="formBox" type="submit" value="RSVP" /></form>
-</div>
-
 <p><iframe frameborder="0" height="650" scrolling="no" src="https://calendar.google.com/calendar/embed?height=650&amp;wkst=1&amp;bgcolor=%23f2df74&amp;ctz=Asia%2FKuala_Lumpur&amp;title=Cyberjaya%20Toastmasters%20Meetings&amp;src=cDc1ZW05NTZlM2I1cjQ5dGRwaXZnOWFnMmNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4ubWFsYXlzaWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%234285F4&amp;color=%230B8043" style="border:solid 1px #777" width="650"></iframe></p>
 
 <p><a href="http://calendar.google.com/calendar/u/1?cid=cDc1ZW05NTZlM2I1cjQ5dGRwaXZnOWFnMmNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ"><span style="color:#0000ff;">Please click here to&nbsp;add this to your calendar and set your own reminder in the setting</span></a></p>
 <script>
-    // fetch("https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU")
-    //     .then((response) => {
-    //         if (response.ok) {
-    //             return response.json();
-    //         } else {
-    //             throw new Error("NETWORK RESPONSE ERROR");
-    //         }
-    //     })
-    //     .then((data) => {
-    //     })
+    // Hide member access log
+    var isAccessLog = document.getElementsByClassName('demos-nav2');
+    if (isAccessLog.length > 0) {
+        document.getElementsByClassName('demos-nav2')[0].style.visibility='hidden';
+        console.log("Member Access Log has been hidden");
+        console.log("Member access log: \n" + document.getElementById('accesslog').value);
+    }
 
-    //Reset form
-    window.addEventListener("load", function() {
-        const form = document.getElementById('fs-frm');
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
-            const data = new FormData(form);
-            const action = e.target.action;
-            fetch(action, {
-                method: 'POST',
-                body: data,
-            })
-                .then(() => {
-                    alert("Thank you for your RSVP. We will keep in touch with you soon");
-                    form.reset();
-                })
-        });
-    });
 
 
     (async () => {
@@ -329,21 +307,21 @@ li {
             console.log("isHybrid: " + isHybrid)
             console.log("Venue: " + venue[i])
 
-            // Find indexes of Zoom Link, ID, Passcode
-            var indexZoomLink = description[i].indexOf("Join Zoom Meeting")
-            console.log("Index Zoom link: " + indexZoomLink)
-            zoomLink[i] = description[i][indexZoomLink + 18] + description[i][indexZoomLink + 19] + description[i][indexZoomLink + 20] + description[i][indexZoomLink + 21] + description[i][indexZoomLink + 22] + description[i][indexZoomLink + 23] + description[i][indexZoomLink + 24] + description[i][indexZoomLink + 25] + description[i][indexZoomLink + 26] + description[i][indexZoomLink + 27] + description[i][indexZoomLink + 28] + description[i][indexZoomLink + 29] + description[i][indexZoomLink + 30] + description[i][indexZoomLink + 31] + description[i][indexZoomLink + 32] + description[i][indexZoomLink + 33] + description[i][indexZoomLink + 34] + description[i][indexZoomLink + 35] + description[i][indexZoomLink + 36] + description[i][indexZoomLink + 37] + description[i][indexZoomLink + 38] + description[i][indexZoomLink + 39] + description[i][indexZoomLink + 40] + description[i][indexZoomLink + 41] + description[i][indexZoomLink + 42] + description[i][indexZoomLink + 43] + description[i][indexZoomLink + 44] + description[i][indexZoomLink + 45] + description[i][indexZoomLink + 46] + description[i][indexZoomLink + 47] + description[i][indexZoomLink + 48] + description[i][indexZoomLink + 49] + description[i][indexZoomLink + 50] + description[i][indexZoomLink + 51] + description[i][indexZoomLink + 52] + description[i][indexZoomLink + 53] + description[i][indexZoomLink + 54] + description[i][indexZoomLink + 55] + description[i][indexZoomLink + 56] + description[i][indexZoomLink + 57] + description[i][indexZoomLink + 58] + description[i][indexZoomLink + 59] + description[i][indexZoomLink + 60] + description[i][indexZoomLink + 61] + description[i][indexZoomLink + 62] + description[i][indexZoomLink + 63] + description[i][indexZoomLink + 64] + description[i][indexZoomLink + 65] + description[i][indexZoomLink + 66] + description[i][indexZoomLink + 67] + description[i][indexZoomLink + 68] + description[i][indexZoomLink + 69] + description[i][indexZoomLink + 70] + description[i][indexZoomLink + 71] + description[i][indexZoomLink + 72] + description[i][indexZoomLink + 73] + description[i][indexZoomLink + 74] + description[i][indexZoomLink + 75] + description[i][indexZoomLink + 76] + description[i][indexZoomLink + 77] + description[i][indexZoomLink + 78] + description[i][indexZoomLink + 79] + description[i][indexZoomLink + 80] + description[i][indexZoomLink + 81] + description[i][indexZoomLink + 82] + description[i][indexZoomLink + 83] + description[i][indexZoomLink + 84] + description[i][indexZoomLink + 85] + description[i][indexZoomLink + 86] + description[i][indexZoomLink + 87] + description[i][indexZoomLink + 88] + description[i][indexZoomLink + 89] + description[i][indexZoomLink + 90] + description[i][indexZoomLink + 91] + description[i][indexZoomLink + 92] + description[i][indexZoomLink + 93];
-            console.log("Zoom link:" + zoomLink[i])
-
-            var indexZoomID = description[i].indexOf("Meeting ID")
-            console.log("Index Zoom ID: " + indexZoomID)
-            zoomID[i] = description[i][indexZoomID + 12] + description[i][indexZoomID + 13] + description[i][indexZoomID + 14] + description[i][indexZoomID + 15] + description[i][indexZoomID + 16] + description[i][indexZoomID + 17] + description[i][indexZoomID + 18] + description[i][indexZoomID + 19] + description[i][indexZoomID + 20] + description[i][indexZoomID + 21] + description[i][indexZoomID + 22] + description[i][indexZoomID + 23] + description[i][indexZoomID + 24]
-            console.log("Zoom ID: " + zoomID[i])
-
-            var indexPasscode = description[i].indexOf("Passcode")
-            console.log("Index Passcode: " + indexPasscode)
-            passcode[i] = description[i][indexPasscode + 10] + description[i][indexPasscode + 11] + description[i][indexPasscode + 12] + description[i][indexPasscode + 13] + description[i][indexPasscode + 14] + description[i][indexPasscode + 15];
-            console.log("Passcode: " + passcode[i])
+            // // Find indexes of Zoom Link, ID, Passcode
+            // var indexZoomLink = description[i].indexOf("Join Zoom Meeting")
+            // console.log("Index Zoom link: " + indexZoomLink)
+            // zoomLink[i] = description[i][indexZoomLink + 18] + description[i][indexZoomLink + 19] + description[i][indexZoomLink + 20] + description[i][indexZoomLink + 21] + description[i][indexZoomLink + 22] + description[i][indexZoomLink + 23] + description[i][indexZoomLink + 24] + description[i][indexZoomLink + 25] + description[i][indexZoomLink + 26] + description[i][indexZoomLink + 27] + description[i][indexZoomLink + 28] + description[i][indexZoomLink + 29] + description[i][indexZoomLink + 30] + description[i][indexZoomLink + 31] + description[i][indexZoomLink + 32] + description[i][indexZoomLink + 33] + description[i][indexZoomLink + 34] + description[i][indexZoomLink + 35] + description[i][indexZoomLink + 36] + description[i][indexZoomLink + 37] + description[i][indexZoomLink + 38] + description[i][indexZoomLink + 39] + description[i][indexZoomLink + 40] + description[i][indexZoomLink + 41] + description[i][indexZoomLink + 42] + description[i][indexZoomLink + 43] + description[i][indexZoomLink + 44] + description[i][indexZoomLink + 45] + description[i][indexZoomLink + 46] + description[i][indexZoomLink + 47] + description[i][indexZoomLink + 48] + description[i][indexZoomLink + 49] + description[i][indexZoomLink + 50] + description[i][indexZoomLink + 51] + description[i][indexZoomLink + 52] + description[i][indexZoomLink + 53] + description[i][indexZoomLink + 54] + description[i][indexZoomLink + 55] + description[i][indexZoomLink + 56] + description[i][indexZoomLink + 57] + description[i][indexZoomLink + 58] + description[i][indexZoomLink + 59] + description[i][indexZoomLink + 60] + description[i][indexZoomLink + 61] + description[i][indexZoomLink + 62] + description[i][indexZoomLink + 63] + description[i][indexZoomLink + 64] + description[i][indexZoomLink + 65] + description[i][indexZoomLink + 66] + description[i][indexZoomLink + 67] + description[i][indexZoomLink + 68] + description[i][indexZoomLink + 69] + description[i][indexZoomLink + 70] + description[i][indexZoomLink + 71] + description[i][indexZoomLink + 72] + description[i][indexZoomLink + 73] + description[i][indexZoomLink + 74] + description[i][indexZoomLink + 75] + description[i][indexZoomLink + 76] + description[i][indexZoomLink + 77] + description[i][indexZoomLink + 78] + description[i][indexZoomLink + 79] + description[i][indexZoomLink + 80] + description[i][indexZoomLink + 81] + description[i][indexZoomLink + 82] + description[i][indexZoomLink + 83] + description[i][indexZoomLink + 84] + description[i][indexZoomLink + 85] + description[i][indexZoomLink + 86] + description[i][indexZoomLink + 87] + description[i][indexZoomLink + 88] + description[i][indexZoomLink + 89] + description[i][indexZoomLink + 90] + description[i][indexZoomLink + 91] + description[i][indexZoomLink + 92] + description[i][indexZoomLink + 93];
+            // console.log("Zoom link:" + zoomLink[i])
+            //
+            // var indexZoomID = description[i].indexOf("Meeting ID")
+            // console.log("Index Zoom ID: " + indexZoomID)
+            // zoomID[i] = description[i][indexZoomID + 12] + description[i][indexZoomID + 13] + description[i][indexZoomID + 14] + description[i][indexZoomID + 15] + description[i][indexZoomID + 16] + description[i][indexZoomID + 17] + description[i][indexZoomID + 18] + description[i][indexZoomID + 19] + description[i][indexZoomID + 20] + description[i][indexZoomID + 21] + description[i][indexZoomID + 22] + description[i][indexZoomID + 23] + description[i][indexZoomID + 24]
+            // console.log("Zoom ID: " + zoomID[i])
+            //
+            // var indexPasscode = description[i].indexOf("Passcode")
+            // console.log("Index Passcode: " + indexPasscode)
+            // passcode[i] = description[i][indexPasscode + 10] + description[i][indexPasscode + 11] + description[i][indexPasscode + 12] + description[i][indexPasscode + 13] + description[i][indexPasscode + 14] + description[i][indexPasscode + 15];
+            // console.log("Passcode: " + passcode[i])
 
             dateResult[i] = days[dateParse[i].getDay()] + " " + sky + ", " + date[i] + nth(date[i]) + " " + months[dateParse[i].getMonth()] + " " + year[i] + ", " + formatAMPM(dateParse[i]) + " - " + formatAMPM(dateEndParse[i]) + isHybrid;
 
@@ -359,12 +337,7 @@ li {
 
             str += "<li><a href= '" + htmlLink[i] + "' target='_blank' >" + futureDates[i] + "</a>";
 
-            // For RSVP Form
-            var option = document.createElement("option");
-            option.text = futureDates[i];
-            option.value = futureDates[i];
-            var select = document.getElementById("date");
-            select.appendChild(option);
+
 
         }
 
@@ -384,10 +357,10 @@ li {
 
 <h1><u>Direction</u></h1>
 
-<p><img alt="" src="/imageuploads/5257608/Sigma_Rectrix_Location_Map.png" style="width: 119%;" /></p>
+<p><img alt="" src="/imageuploads/5257608/Cyberjaya_Community_Toastmasters_Club_Venue_Direction.png" style="width: 119%;" /><img alt="" src="/imageuploads/5257608/Sigma_Rectrix_Location_Map.png" style="width: 119%;" /></p>
 <script src="https://www.powr.io/powr.js?platform=html"></script>
 
-<p><a href="https://waze.to/lr/hw2829hkpy"><img alt="" src="/imageuploads/5257608/waze_PNG43.png" style="width: 30px; height: 30px;" /></a>&nbsp;Waze Direction: <a href="https://waze.to/lr/hw2829hkpy"><span style="color:#0000ff;">https://waze.to/lr/hw2829hkpy</span></a></p>
+<p>Waze Direction: <a href="https://waze.to/lr/hw2829hkpy"><span style="color:#0000ff;">https://waze.to/lr/hw2829hkpy</span></a></p>
 <!-- Facebook Pixel Code --><script>
     !function (f, b, e, v, n, t, s) {
         if (f.fbq) return;

@@ -69,7 +69,8 @@ a:active {
         }
 
         function numberWithSpaces(x) {
-            return x.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");
+            // Assuming x is "83834749361" and needs to be formatted as "838 3474 9361"
+            return x.slice(0, 3) + " " + x.slice(3, 7) + " " + x.slice(7);
         }
 
         function linkToZoom(zoomLink) {
@@ -115,6 +116,33 @@ a:active {
             var startDate = new Date(repositories.items[i].start.dateTime);
             var endDate = new Date(repositories.items[i].end.dateTime);
             description[i] = repositories.items[i].description;
+            // Check if description is available and is a string
+            if (repositories.items[i].description && typeof repositories.items[i].description === 'string') {
+                description[i] = repositories.items[i].description;
+
+                // Regex to find the Zoom link
+                var zoomLinkRegex = /https?:\/\/us02web\.zoom\.us\/j\/\d+\?pwd=\w+/;
+                var zoomLinkMatch = description[i].match(zoomLinkRegex);
+                if (zoomLinkMatch) {
+                    zoomLink[i] = zoomLinkMatch[0];
+                }
+
+                // Regex to find the Meeting ID
+                var zoomIDRegex = /Meeting ID: (\d{3} \d{4} \d{4})/;
+                var zoomIDMatch = description[i].match(zoomIDRegex);
+                if (zoomIDMatch) {
+                    zoomID[i] = zoomIDMatch[1].replace(/\s/g, ''); // Remove spaces
+                }
+
+                // Regex to find the Passcode
+                var passcodeRegex = /Passcode: (\d+)/;
+                var passcodeMatch = description[i].match(passcodeRegex);
+                if (passcodeMatch) {
+                    passcode[i] = passcodeMatch[1];
+                }
+            } else {
+                console.error('Description is not available or not a string for item index:', i);
+            }
             year[i] = startDate.getFullYear();
             month[i] = startDate.getMonth() + 1;
             date[i] = startDate.getDate();
@@ -155,32 +183,25 @@ a:active {
             console.log("isHybrid: " + isHybrid)
             console.log("Venue: " + venue[i])
 
-            // Find indexes of Zoom Link
-            var indexZoomLink = description[i].indexOf("Join Zoom Meeting");
-            var zoomLinkRegex = /https?:\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/;
-            var zoomLinkMatch = description[i].slice(indexZoomLink).match(zoomLinkRegex);
-            if (zoomLinkMatch) {
-                zoomLink[i] = zoomLinkMatch[0];
-                console.log("Zoom link:" + zoomLink[i]);
-            }
 
 
 
-            // Find Zoom ID using regular expression
-            var zoomIDRegex = /Meeting ID: (\d{3} \d{4} \d{4})/;
-            var zoomIDMatch = description[i].match(zoomIDRegex);
-            if (zoomIDMatch) {
-                zoomID[i] = zoomIDMatch[1];
-                console.log("Zoom ID: " + zoomID[i]);
-            }
 
-            // Find Passcode using regular expression
-            var passcodeRegex = /Passcode: (\d+)/;
-            var passcodeMatch = description[i].match(passcodeRegex);
-            if (passcodeMatch) {
-                passcode[i] = passcodeMatch[1];
-                console.log("Passcode: " + passcode[i]);
-            }
+            // // Find Zoom ID using regular expression
+            // var zoomIDRegex = /Meeting ID: (\d{3} \d{4} \d{4})/;
+            // var zoomIDMatch = description[i].match(zoomIDRegex);
+            // if (zoomIDMatch) {
+            //     zoomID[i] = zoomIDMatch[1];
+            //     console.log("Zoom ID: " + zoomID[i]);
+            // }
+            //
+            // // Find Passcode using regular expression
+            // var passcodeRegex = /Passcode: (\d+)/;
+            // var passcodeMatch = description[i].match(passcodeRegex);
+            // if (passcodeMatch) {
+            //     passcode[i] = passcodeMatch[1];
+            //     console.log("Passcode: " + passcode[i]);
+            // }
 
 
             dateResult[i] = days[dateParse[i].getDay()] + " " + sky + ", " + date[i] + nth(date[i]) + " " + months[dateParse[i].getMonth()] + " " + year[i] + ", " + formatAMPM(dateParse[i]) + " - " + formatAMPM(dateEndParse[i]) + isHybrid;
@@ -200,7 +221,7 @@ a:active {
 
         document.getElementById("date").innerHTML  = dateResult[0]; // Next Meeting: Wednesday [sky], nth Month 2022, 8:00 pm - 10:00 pm
         document.getElementById("location").href  = linkToGoogleMap(venue[0]); // Venue:
-        document.getElementById("ID").innerHTML  = zoomID[0]; // Meeting ID:
+        document.getElementById("ID").innerHTML  = numberWithSpaces(zoomID[0]);
         document.getElementById("passcode").innerHTML  = passcode[0]; // Passcode:
         linkToZoom(zoomLink[0]); // Join Zoom Meeting:
         document.getElementById("dateLink").href  = linkToDate(timeLink); // Check your local time here

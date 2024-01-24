@@ -24,15 +24,7 @@ a:active {
 <h3><u>Next Meeting: <b id="date"> . </b></u></h3>
 
 <p><strong>Venue: <href id="location"> </href> &nbsp;</strong></p>
-
-<p><strong>Meeting ID:&nbsp;<b id="ID"> </b></strong></p>
-
-<p><strong>Passcode:&nbsp;<b id="passcode"> </b> </strong></p>
-
-<p><strong>Join Zoom Meeting: <href id="zoom"> </href> &nbsp;</strong></p>
-
-<p dir="ltr">Check your local time <strong><href id="dateLink"> </href></strong></p>
-<script>
+<!--<p><strong>Meeting ID: <b id="ID"> </b></strong></p>--><!--<p><strong>Passcode: <b id="passcode"> </b> </strong></p>--><!--<p><strong>Join Zoom Meeting: <span id="zoom"> </span>  </strong></p>--><!--<p dir="ltr">Check your local time <strong><href id="dateLink"> </href></strong></p>--><script>
   // fetch("https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU")
   //     .then((response) => {
   //         if (response.ok) {
@@ -105,23 +97,25 @@ a:active {
     const date = [], month = [], year = [], startTime = [], startTimeWithoutColon = [], endTime = [], dateParse = [], dateEndParse = [], dateResult = [], zoomLink = [], zoomID = [], passcode = [];
     const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    var timeBackLink = "&p1=122&ah=2&am=15", timeFrontLink = "https://www.timeanddate.com/worldclock/fixedtime.html?msg=UUM+Toastmasters+Club+Meeting&iso=";
+    var timeBackLink = "&p1=122&ah=2&am=15", timeFrontLink = "https://www.timeanddate.com/worldclock/fixedtime.html?msg=Cyberjaya+Community+Toastmasters+Club+Meeting&iso=";
     let sky, isHybrid;
     console.log(dateNow)
     console.log("") // Space between this & the Zoom ID
 
     for(let i = 0; i < repositories.items.length; i++) {
-      dateTime[i] = repositories.items[i].start.dateTime.split("")
-      endDateTime[i] = repositories.items[i].end.dateTime.split("");
-      description[i] = repositories.items[i].description
-      year[i] = dateTime[i][0] + dateTime[i][1] + dateTime[i][2] + dateTime[i][3]
-      month[i] = dateTime[i][5] + dateTime[i][6]
-      date[i] = dateTime[i][8] + dateTime[i][9]
-      startTime[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][13] + dateTime[i][14] + dateTime[i][15]
-      endTime[i] = endDateTime[i][11] + endDateTime[i][12] + endDateTime[i][13] + endDateTime[i][14] + endDateTime[i][15]
-      startTimeWithoutColon[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][14] + dateTime[i][15]
-      dateParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + startTime[i])
-      dateEndParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + endTime[i])
+      // Extract date and time information using Date object
+      var startDate = new Date(repositories.items[i].start.dateTime);
+      var endDate = new Date(repositories.items[i].end.dateTime);
+      description[i] = repositories.items[i].description;
+      year[i] = startDate.getFullYear();
+      month[i] = startDate.getMonth() + 1;
+      date[i] = startDate.getDate();
+      startTime[i] = startDate.toTimeString().slice(0, 5);
+      endTime[i] = endDate.toTimeString().slice(0, 5);
+      startTimeWithoutColon[i] = startTime[i].replace(':', '');
+      // Use startDate and endDate variables to simplify code
+      dateParse[i] = startDate;
+      dateEndParse[i] = endDate;
 
       // Find skylight
       if (dateParse[i].getHours() < 12){
@@ -142,34 +136,46 @@ a:active {
       // const temp = zoomLink[i].split("")
       // zoomID[i] = temp[26] + temp[27] + temp[28] + temp[29] + temp[30] + temp[31] + temp[32] + temp[33] + temp[34] + temp[35] + temp[36];
 
-      // Find if it's hybrid or online-only
-      if (venue[i].includes("Sigma")){
-        isHybrid = " (Hybrid) "
-      }
-      else {
-        isHybrid = " (Online-only) "
-        venue[i] = "Online Only"
-      }
-      console.log("isHybrid: " + isHybrid)
-      console.log("Venue: " + venue[i])
+      // // Find if it's hybrid or online-only
+      // if (venue[i].includes("Sigma")){
+      //     isHybrid = " (Hybrid) "
+      // }
+      // else {
+      //     isHybrid = " (Online-only) "
+      //     venue[i] = "Online Only"
+      // }
+      // console.log("isHybrid: " + isHybrid)
+      // console.log("Venue: " + venue[i])
 
-      // Find indexes of Zoom Link, ID, Passcode
-      var indexZoomLink = description[i].indexOf("Join Zoom Meeting")
-      console.log("Index Zoom link: " + indexZoomLink)
-      zoomLink[i] = description[i][indexZoomLink + 18] + description[i][indexZoomLink + 19] + description[i][indexZoomLink + 20] + description[i][indexZoomLink + 21] + description[i][indexZoomLink + 22] + description[i][indexZoomLink + 23] + description[i][indexZoomLink + 24] + description[i][indexZoomLink + 25] + description[i][indexZoomLink + 26] + description[i][indexZoomLink + 27] + description[i][indexZoomLink + 28] + description[i][indexZoomLink + 29] + description[i][indexZoomLink + 30] + description[i][indexZoomLink + 31] + description[i][indexZoomLink + 32] + description[i][indexZoomLink + 33] + description[i][indexZoomLink + 34] + description[i][indexZoomLink + 35] + description[i][indexZoomLink + 36] + description[i][indexZoomLink + 37] + description[i][indexZoomLink + 38] + description[i][indexZoomLink + 39] + description[i][indexZoomLink + 40] + description[i][indexZoomLink + 41] + description[i][indexZoomLink + 42] + description[i][indexZoomLink + 43] + description[i][indexZoomLink + 44] + description[i][indexZoomLink + 45] + description[i][indexZoomLink + 46] + description[i][indexZoomLink + 47] + description[i][indexZoomLink + 48] + description[i][indexZoomLink + 49] + description[i][indexZoomLink + 50] + description[i][indexZoomLink + 51] + description[i][indexZoomLink + 52] + description[i][indexZoomLink + 53] + description[i][indexZoomLink + 54] + description[i][indexZoomLink + 55] + description[i][indexZoomLink + 56] + description[i][indexZoomLink + 57] + description[i][indexZoomLink + 58] + description[i][indexZoomLink + 59] + description[i][indexZoomLink + 60] + description[i][indexZoomLink + 61] + description[i][indexZoomLink + 62] + description[i][indexZoomLink + 63] + description[i][indexZoomLink + 64] + description[i][indexZoomLink + 65] + description[i][indexZoomLink + 66] + description[i][indexZoomLink + 67] + description[i][indexZoomLink + 68] + description[i][indexZoomLink + 69] + description[i][indexZoomLink + 70] + description[i][indexZoomLink + 71] + description[i][indexZoomLink + 72] + description[i][indexZoomLink + 73] + description[i][indexZoomLink + 74] + description[i][indexZoomLink + 75] + description[i][indexZoomLink + 76] + description[i][indexZoomLink + 77] + description[i][indexZoomLink + 78] + description[i][indexZoomLink + 79] + description[i][indexZoomLink + 80] + description[i][indexZoomLink + 81] + description[i][indexZoomLink + 82] + description[i][indexZoomLink + 83] + description[i][indexZoomLink + 84] + description[i][indexZoomLink + 85] + description[i][indexZoomLink + 86] + description[i][indexZoomLink + 87] + description[i][indexZoomLink + 88] + description[i][indexZoomLink + 89] + description[i][indexZoomLink + 90] + description[i][indexZoomLink + 91] + description[i][indexZoomLink + 92] + description[i][indexZoomLink + 93];
-      console.log("Zoom link:" + zoomLink[i])
+      // Find indexes of Zoom Link
+      // var indexZoomLink = description[i].indexOf("Join Zoom Meeting");
+      // var zoomLinkRegex = /https?:\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/;
+      // var zoomLinkMatch = description[i].slice(indexZoomLink).match(zoomLinkRegex);
+      // if (zoomLinkMatch) {
+      //     zoomLink[i] = zoomLinkMatch[0];
+      //     console.log("Zoom link:" + zoomLink[i]);
+      // }
+      //
 
-      var indexZoomID = description[i].indexOf("Meeting ID")
-      console.log("Index Zoom ID: " + indexZoomID)
-      zoomID[i] = description[i][indexZoomID + 12] + description[i][indexZoomID + 13] + description[i][indexZoomID + 14] + description[i][indexZoomID + 15] + description[i][indexZoomID + 16] + description[i][indexZoomID + 17] + description[i][indexZoomID + 18] + description[i][indexZoomID + 19] + description[i][indexZoomID + 20] + description[i][indexZoomID + 21] + description[i][indexZoomID + 22] + description[i][indexZoomID + 23] + description[i][indexZoomID + 24]
-      console.log("Zoom ID: " + zoomID[i])
 
-      var indexPasscode = description[i].indexOf("Passcode")
-      console.log("Index Passcode: " + indexPasscode)
-      passcode[i] = description[i][indexPasscode + 10] + description[i][indexPasscode + 11] + description[i][indexPasscode + 12] + description[i][indexPasscode + 13] + description[i][indexPasscode + 14] + description[i][indexPasscode + 15];
-      console.log("Passcode: " + passcode[i])
+      // // Find Zoom ID using regular expression
+      // var zoomIDRegex = /Meeting ID: (\d{3} \d{4} \d{4})/;
+      // var zoomIDMatch = description[i].match(zoomIDRegex);
+      // if (zoomIDMatch) {
+      //     zoomID[i] = zoomIDMatch[1];
+      //     console.log("Zoom ID: " + zoomID[i]);
+      // }
 
-      dateResult[i] = days[dateParse[i].getDay()] + " " + sky + ", " + date[i] + nth(date[i]) + " " + months[dateParse[i].getMonth()] + " " + year[i] + ", " + formatAMPM(dateParse[i]) + " - " + formatAMPM(dateEndParse[i]) + isHybrid;
+      // // Find Passcode using regular expression
+      // var passcodeRegex = /Passcode: (\d+)/;
+      // var passcodeMatch = description[i].match(passcodeRegex);
+      // if (passcodeMatch) {
+      //     passcode[i] = passcodeMatch[1];
+      //     console.log("Passcode: " + passcode[i]);
+      // }
+
+
+      dateResult[i] = days[dateParse[i].getDay()] + " " + sky + ", " + date[i] + nth(date[i]) + " " + months[dateParse[i].getMonth()] + " " + year[i] + ", " + formatAMPM(dateParse[i]) + " - " + formatAMPM(dateEndParse[i]);
 
       console.log(repositories.items[i])
       console.log("dateResult: " + dateResult[i])
@@ -186,9 +192,9 @@ a:active {
 
     document.getElementById("date").innerHTML  = dateResult[0]; // Next Meeting: Wednesday [sky], nth Month 2022, 8:00 pm - 10:00 pm
     document.getElementById("location").href  = linkToGoogleMap(venue[0]); // Venue:
-    document.getElementById("ID").innerHTML  = zoomID[0]; // Meeting ID:
-    document.getElementById("passcode").innerHTML  = passcode[0]; // Passcode:
-    document.getElementById("zoom").href  = linkToZoom(zoomLink[0]); // Join Zoom Meeting:
+    // document.getElementById("ID").innerHTML  = zoomID[0]; // Meeting ID:
+    // document.getElementById("passcode").innerHTML  = passcode[0]; // Passcode:
+    // linkToZoom(zoomLink[0]); // Join Zoom Meeting:
     document.getElementById("dateLink").href  = linkToDate(timeLink); // Check your local time here
   })();
 
@@ -196,7 +202,7 @@ a:active {
 
 <p dir="ltr">Get the Meeting Agenda and meeting resources here,&nbsp;<a href="https://linktr.ee/uumtoastmasters" target="_blank"><span style="color:#0000ff;">https://linktr.ee/uumtoastmasters</span></a></p>
 
-<p dir="ltr">Visit <a href="https://cyberjaya.toastmastersclubs.org/directions.html" target="_blank"><span style="color:#0000ff;">Meeting Info/Directions page</span></a> to see a list of the club&#39;s Future Meetings</p>
+<p dir="ltr">Visit <a href="https://uum.toastmastersclubs.org/directions.html" target="_blank"><span style="color:#0000ff;">Meeting Info/Directions page</span></a> to see a list of the club&#39;s Future Meetings</p>
 <!-- Facebook Pixel Code --><script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -212,10 +218,16 @@ a:active {
                         src="https://www.facebook.com/tr?id=481726686228284&ev=PageView&noscript=1"
 /></noscript><!-- End Facebook Pixel Code -->
 
-<p><img alt="Default Home Page Image" src="/imageuploads/6591355/Slide1.PNG" style="display: block; margin: 0px auto; width: 119%; max-width: 660px;" /></p>
+<p><img alt="Default Home Page Image" src="/imageuploads/6591355/Slide1.PNG" style="display: block; margin: 0px auto; width: 118%; max-width: 660px;" /></p>
 
-<p>UUM Toastmasters Club is a public speaking club with a vision to grow Universiti Utara Malaysia (UUM) students and staff to benefit from the training of Toastmasters to become better public speakers.</p>
+<p>UUM Toastmasters Club is a public speaking club with a vision to grow Universiti Utara Malaysia (UUM) students and staff to benefit from the training of Toastmasters to become better public speakers.&nbsp;Students and staff are welcome to join the club as a member. Please <a href="https://forms.gle/pErGEfAgutWpJ7rn7" target="_blank">register here</a> to know more updates on the club meetings.</p>
 
+<hr />
+<p>The <strong>first-ever demo meeting</strong> was held on the 16th of June 2022, Thursday night, to let those who are interested, like you, know how a Toastmasters meeting works. You can watch the recording and use the timestamp in the description to navigate the video. There&#39;s a Q &amp; A session at the end of the video that answers all your intriguing questions.</p>
+
+<div class="youtube-embed-wrapper" style="position:relative;padding-bottom:56.25%;padding-top:30px;height:0;overflow:hidden"><iframe allowfullscreen="" frameborder="0" height="360" src="https://www.youtube.com/embed/EQ2of0dXn6g?rel=0" style="position:absolute;top:0;left:0;width:100%;height:100%" width="640"></iframe></div>
+
+<hr />
 <h1><u>How Toastmasters Works</u></h1>
 
 <p style="text-align: justify;">At Toastmasters, members learn by speaking to groups and working with others in a supportive environment. A typical Toastmasters club is made up of 20 to 30 people who meet twice a month for approximately two&nbsp;hours. Each meeting gives members several opportunities:</p>
@@ -266,11 +278,24 @@ a:active {
 <h2><a href="https://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;"><strong>Become our Member Now by clicking here!</strong></span></a></h2>
 
 <hr />
+<h1 dir="ltr" id="h.sv99lysnmd8r_l" style="text-align: center;" tabindex="-1">Universities with their own Toastmasters Clubs</h1>
+
+<p dir="ltr"><a href="https://www.toastmasters.org/Find-a-Club/01028031-university-malaya-toastmasters-club" target="_blank"><img src="/imageuploads/6591355/img-logo-UM.png" style="height: 173px; width: 150px;" /></a><a href="https://www.toastmasters.org/Find-a-Club/07032664-usm-health-campus-bilingual-toastmasters-club" target="_blank"><img src="https://www.usm.my/templates/yootheme/cache/c3/usmlogo-c38cf357.jpeg" style="height: 150px; width: 239px;" /></a>&nbsp;&nbsp;&nbsp;<a href="https://www.toastmasters.org/Find-a-Club/01329493-utm-toastmasters-club" target="_blank"><img src="http://corporateaffairs.utm.my/wp-content/uploads/2011/03/logo-utm.jpg" style="width: 299px; height: 100px;" /></a>&nbsp; &nbsp; &nbsp;<a href="https://www.toastmasters.org/Find-a-Club/07881074-07881074" target="_blank"><img src="https://ums.edu.my/ppskk/images/Logo/LOGO_UMS_hitam.png" /></a></p>
+
+<p dir="ltr"></p>
+
+<p><a href="https://www.toastmasters.org/Find-a-Club/01558120-01558120" target="_blank"><img src="https://university.taylors.edu.my/content/dam/taylorsrevamp/university/homepage/header/taylors-university-logo-color-198x72.svg" style="width: 325px; height: 150px;" /></a>&nbsp;&nbsp;<a href="https://www.toastmasters.org/Find-a-Club/02472127-sunway-university-toastmasters-club" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Sunway_logo.jpg/1200px-Sunway_logo.jpg" style="width: 400px; height: 171px;" /></a>&nbsp;&nbsp;<a href="https://www.toastmasters.org/Find-a-Club/01543102-monash-university-toastmasters-club" target="_blank"><img src="https://www.monash.edu.my/__data/assets/file/0006/3231276/25YearsStampMalaysia_MonashLogo_MONO_WEB.svg" style="width: 257px; height: 150px;" /></a>&nbsp;&nbsp;<a href="https://www.toastmasters.org/Find-a-Club/05183628-heriot-watt-university-malaysia-toastmasters-club" target="_blank"><img src="https://media.licdn.com/dms/image/C4E0BAQG5DsVDArsdVw/company-logo_200_200/0/1663673796263?e=1706745600&amp;v=beta&amp;t=UsrP7ypyN1mHwXC6jiJ86cRzn22Y7EkaND790lIXW1M" style="width: 200px; height: 200px;" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.toastmasters.org/Find-a-Club/02081354-utar-toastmasters-club" target="_blank"><img src="https://www.utar.edu.my/main2019/utar_logo_20190226.jpg" style="width: 257px; height: 150px;" /></a>&nbsp;&nbsp;<a href="https://www.toastmasters.org/Find-a-Club/03730557-03730557" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/IIUM_Logo_.svg" style="width: 400px; height: 117px;" /></a></p>
+
+<hr />
 <h1><u>How to join the meeting as a guest?</u></h1>
 
 <p>You can send an email to us via <a href="https://cyberjaya.toastmastersclubs.org?contactus"><span style="color:#0000ff;">Contact Us</span></a>&nbsp;page&nbsp;or send a Facebook messenger&nbsp;to us via the chat button at the bottom of the website. Alternatively, you can enter your email in the form below.</p>
 
-<div class="video-container"><iframe frameborder="0" height="650" marginheight="0" marginwidth="0" src="https://docs.google.com/forms/d/e/1FAIpQLScz1NMTNOi2jnxtopem1SFHsDaX_ojZl3fEU27Aro_KbJ12-w/viewform?embedded=true" width="600">Loading&amp;hellip;</iframe></div>
+<div class="video-container"><iframe frameborder="0" height="3615" marginheight="0" marginwidth="0" src="https://docs.google.com/forms/d/e/1FAIpQLSfZIZahca5yJ-Kz_RB9yFOivuRtlDgnVqsQ9OK047OpnJtgVQ/viewform?embedded=true" width="640">Loading&hellip;</iframe></div>
+
+<p></p>
+
+<p>Can&#39;t see the embedded form? Click <a href="https://bit.ly/uumtoastmasters" target="_blank">bit.ly/uumtoastmasters</a></p>
 <!-- Messenger Chat plugin Code -->
 
 <div id="fb-root"></div>
