@@ -180,8 +180,8 @@ a:active {
                 console.error('Description is not available or not a string for item index:', i);
             }
             year[i] = startDate.getFullYear();
-            month[i] = startDate.getMonth() + 1;
-            date[i] = startDate.getDate();
+            month[i] = (startDate.getMonth() + 1).toString().padStart(2, '0'); // Ensure month is two digits
+            date[i] = startDate.getDate().toString().padStart(2, '0'); // Ensure date is two digits
             startTime[i] = startDate.toTimeString().slice(0, 5);
             endTime[i] = endDate.toTimeString().slice(0, 5);
             startTimeWithoutColon[i] = startTime[i].replace(':', '');
