@@ -18,10 +18,23 @@ a:active {
     background-color: transparent;
     text-decoration: underline;
 }
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    color: white;
+}
 </style>
 <p></p>
 
-<h3><u>Next Meeting: <b id="date"> . </b></u></h3>
+<h3><u>Next Meeting: <b id="date"> . </b></u> <span id="countdown" class="badge" style="margin-left: 20px;"></span></h3>
 
 <p><strong>Venue: <href id="location"> </href> &nbsp;</strong></p>
 
@@ -96,6 +109,30 @@ a:active {
             link.target = '_blank';
             return document.getElementById('dateLink').appendChild(link);
         }
+        var distance; // Declare distance globally
+
+        function updateCountdown() {
+            var now = new Date().getTime();
+            console.log(dateParse[0])
+            var meetingDate = new Date(dateParse[0]).getTime(); // assuming dateResult[0] is in valid date format
+            distance = meetingDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        }
+
+// Update the countdown every 1 second
+        var countdownInterval = setInterval(function() {
+            updateCountdown();
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "Meeting has started!";
+            }
+        }, 1000);
 
         // Start of Async function
         var dateNow = new Date().toISOString();
