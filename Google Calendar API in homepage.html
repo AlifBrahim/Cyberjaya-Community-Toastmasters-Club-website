@@ -151,6 +151,18 @@ a:active {
         console.log(dateNow)
         console.log("") // Space between this & the Zoom ID
 
+        // Check if there are no events
+        if (!repositories.items || repositories.items.length === 0) {
+            document.getElementById("date").innerHTML = "Contact club officer for next meeting";
+            document.getElementById("location").innerHTML = "TBD";
+            document.getElementById("ID").innerHTML = "TBD";
+            document.getElementById("passcode").innerHTML = "TBD";
+            document.getElementById("zoom").innerHTML = "TBD";
+            document.getElementById("dateLink").innerHTML = "";
+            document.getElementById("countdown").innerHTML = "No upcoming meetings";
+            return; // Exit early since there are no events
+        }
+
         for(let i = 0; i < repositories.items.length; i++) {
             // Extract date and time information using Date object
             var startDate = new Date(repositories.items[i].start.dateTime);
