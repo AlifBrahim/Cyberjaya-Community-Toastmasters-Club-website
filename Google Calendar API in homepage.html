@@ -110,8 +110,10 @@ a:active {
             return document.getElementById('dateLink').appendChild(link);
         }
         var distance; // Declare distance globally
+        var dateParse = []; // Declare dateParse globally
 
         function updateCountdown() {
+            if (!dateParse[0]) return; // Guard against undefined
             var now = new Date().getTime();
             var meetingDate = new Date(dateParse[0]).getTime(); // assuming dateResult[0] is in valid date format
             distance = meetingDate - now;
@@ -135,11 +137,13 @@ a:active {
 
         // Start of Async function
         var dateNow = new Date().toISOString();
-        const url = "https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&timeMin=" + dateNow + "&key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU";
-        const response = await fetch(url);
-        const repositories = await response.json();
+        
+        // Create a callback function for JSONP
+        window.handleCalendarResponse = function(data) {
+            try {
+                const repositories = data;
         const dateTime = [], endDateTime = [], description = [], venue = [];
-        const date = [], month = [], year = [], startTime = [], startTimeWithoutColon = [], endTime = [], dateParse = [], dateEndParse = [], dateResult = [], zoomLink = [], zoomID = [], passcode = [];
+        const date = [], month = [], year = [], startTime = [], startTimeWithoutColon = [], endTime = [], dateEndParse = [], dateResult = [], zoomLink = [], zoomID = [], passcode = [];
         const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
         const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
         var timeBackLink = "&p1=122&ah=2&am=15", timeFrontLink = "https://www.timeanddate.com/worldclock/fixedtime.html?msg=Cyberjaya+Community+Toastmasters+Club+Meeting&iso=";
@@ -156,8 +160,8 @@ a:active {
             if (repositories.items[i].description && typeof repositories.items[i].description === 'string') {
                 description[i] = repositories.items[i].description;
 
-                // Regex to find the Zoom link
-                var zoomLinkRegex = /https?:\/\/us02web\.zoom\.us\/j\/\d+\?pwd=\w+/;
+                // Regex to find the Zoom link (updated for new format)
+                var zoomLinkRegex = /https?:\/\/us\d+web\.zoom\.us\/j\/\d+\?pwd=[\w.]+/;
                 var zoomLinkMatch = description[i].match(zoomLinkRegex);
                 if (zoomLinkMatch) {
                     zoomLink[i] = zoomLinkMatch[0];
@@ -261,6 +265,35 @@ a:active {
         document.getElementById("passcode").innerHTML  = passcode[0]; // Passcode:
         linkToZoom(zoomLink[0]); // Join Zoom Meeting:
         document.getElementById("dateLink").href  = linkToDate(timeLink); // Check your local time here
+            } catch (error) {
+                console.error('Error processing calendar data:', error);
+                // Show fallback content when API fails
+                document.getElementById("date").innerHTML = "Please check our <a href='https://cyberjaya.toastmastersclubs.org/directions.html'>Meeting Info page</a> for upcoming meetings";
+                document.getElementById("location").innerHTML = "Sigma Building/Online";
+                document.getElementById("ID").innerHTML = "Contact us for details";
+                document.getElementById("passcode").innerHTML = "Contact us";
+                document.getElementById("zoom").innerHTML = "<a href='https://cyberjaya.toastmastersclubs.org/directions.html'>See Meeting Info</a>";
+                document.getElementById("dateLink").innerHTML = "";
+                document.getElementById("countdown").innerHTML = "Calendar unavailable";
+            }
+        };
+        
+        // Load the calendar data using JSONP
+        const script = document.createElement('script');
+        const url = "https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&timeMin=" + dateNow + "&key=AIzaSyD0MLoDZ5TrzaADlMvRAhCioqaDgQghaKk&callback=handleCalendarResponse";
+        script.src = url;
+        script.onerror = function() {
+            console.error('Failed to load calendar data');
+            // Show fallback content
+            document.getElementById("date").innerHTML = "Please check our <a href='https://cyberjaya.toastmastersclubs.org/directions.html'>Meeting Info page</a> for upcoming meetings";
+            document.getElementById("location").innerHTML = "Sigma Building/Online";
+            document.getElementById("ID").innerHTML = "Contact us for details";
+            document.getElementById("passcode").innerHTML = "Contact us";
+            document.getElementById("zoom").innerHTML = "<a href='https://cyberjaya.toastmastersclubs.org/directions.html'>See Meeting Info</a>";
+            document.getElementById("dateLink").innerHTML = "";
+            document.getElementById("countdown").innerHTML = "Calendar unavailable";
+        };
+        document.head.appendChild(script);
     })();
 
 </script>
@@ -283,7 +316,6 @@ a:active {
                         src="https://www.facebook.com/tr?id=481726686228284&ev=PageView&noscript=1"
 /></noscript><!-- End Facebook Pixel Code -->
 
-<h2 style="text-align: justify;"><span style="color:#ff0000;">Due to the COVID-19 pandemic, our meetings will be held online using Zoom. Join us online every 1st and 3rd Wednesday of the month from 8 pm - 10 pm. Go to the </span><a href="https://cyberjaya.toastmastersclubs.org/directions.html" target="_blank"><span style="color:#0000ff;">Meeting Info</span></a><span style="color:#ff0000;"> page for our next meeting. Ready to change your life? </span><a href="http://cyberjaya.toastmastersclubs.org/Become_a_Member.html" target="_blank"><span style="color:#0000ff;">Become a Member Now!</span></a></h2>
 
 <hr />
 <h1>Welcome to Cyberjaya Community Toastmasters Club</h1>
