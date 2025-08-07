@@ -176,6 +176,14 @@ li {
 
 <p><span style="font-family:Arial,Helvetica,sans-serif;"><span style="font-size:16px;"><strong>Everybody is very welcome to join our online meeting&nbsp;as a guest!&nbsp;</strong></span></span></p>
 
+<div id="zoomInfo" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <h3><u>Meeting Details (All Meetings)</u></h3>
+    <p><strong>Meeting ID: <span id="meetingID"></span></strong></p>
+    <p><strong>Passcode: <span id="meetingPasscode"></span></strong></p>
+    <p><strong>Join Zoom Meeting: <span id="zoomLink"></span></strong></p>
+</div>
+
+<h3><u>Upcoming Meeting Dates</u></h3>
 <p id="futureDates"></p>
 
 <p><iframe frameborder="0" height="650" scrolling="no" src="https://calendar.google.com/calendar/embed?height=650&amp;wkst=1&amp;bgcolor=%23f2df74&amp;ctz=Asia%2FKuala_Lumpur&amp;title=Cyberjaya%20Toastmasters%20Meetings&amp;src=cDc1ZW05NTZlM2I1cjQ5dGRwaXZnOWFnMmNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4ubWFsYXlzaWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%234285F4&amp;color=%230B8043" style="border:solid 1px #777" width="650"></iframe></p>
@@ -220,7 +228,8 @@ li {
         }
 
         function numberWithSpaces(x) {
-            return x.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");
+            // Assuming x is "83834749361" and needs to be formatted as "838 3474 9361"
+            return x.slice(0, 3) + " " + x.slice(3, 7) + " " + x.slice(7);
         }
 
         function linkToZoom(zoomLink) {
@@ -248,9 +257,11 @@ li {
 
         // Start of Async function
         var dateNow = new Date().toISOString();
-        const url = "https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&timeMin=" + dateNow + "&key=AIzaSyDZ5nJ17oqEUSI2fw7AXohYB5rHlKAzfYU";
-        const response = await fetch(url);
-        const repositories = await response.json();
+        
+        // Create a callback function for JSONP
+        window.handleMeetingsCalendarResponse = function(data) {
+            try {
+                const repositories = data;
         const dateTime = [], endDateTime = [], description = [], futureDates = [], htmlLink = [], venue = [];
         const date = [], month = [], year = [], startTime = [], startTimeWithoutColon = [], endTime = [],
             dateParse = [], dateEndParse = [], dateResult = [], zoomLink = [], zoomID = [], passcode = [];
@@ -263,19 +274,48 @@ li {
         console.log(dateNow)
         console.log("") // Space between this & the Zoom ID
 
+        // Check if there are no events
+        if (!repositories.items || repositories.items.length === 0) {
+            document.getElementById("futureDates").innerHTML = "<p>No upcoming meetings scheduled. Please check back later or contact club officers for more information.</p>";
+            // Hide zoom info section when no meetings
+            document.getElementById("zoomInfo").style.display = "none";
+            return; // Exit early since there are no events
+        }
+        
+        // Set Zoom information once (same for all meetings)
+        document.getElementById("meetingID").textContent = numberWithSpaces("82222609862");
+        document.getElementById("meetingPasscode").textContent = "123456";
+        var zoomLinkElement = document.createElement('a');
+        zoomLinkElement.href = "https://us06web.zoom.us/j/82222609862?pwd=3JibKpZ9HZDDuRbamgnLnTyZej2EZG.1";
+        zoomLinkElement.textContent = "Click here to join";
+        zoomLinkElement.target = "_blank";
+        document.getElementById("zoomLink").appendChild(zoomLinkElement);
+
         for (let i = 0; i < repositories.items.length; i++) {
-            dateTime[i] = repositories.items[i].start.dateTime.split("")
-            endDateTime[i] = repositories.items[i].end.dateTime.split("");
-            description[i] = repositories.items[i].description
-            htmlLink[i] = repositories.items[i].htmlLink
-            year[i] = dateTime[i][0] + dateTime[i][1] + dateTime[i][2] + dateTime[i][3]
-            month[i] = dateTime[i][5] + dateTime[i][6]
-            date[i] = dateTime[i][8] + dateTime[i][9]
-            startTime[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][13] + dateTime[i][14] + dateTime[i][15]
-            endTime[i] = endDateTime[i][11] + endDateTime[i][12] + endDateTime[i][13] + endDateTime[i][14] + endDateTime[i][15]
-            startTimeWithoutColon[i] = dateTime[i][11] + dateTime[i][12] + dateTime[i][14] + dateTime[i][15]
-            dateParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + startTime[i])
-            dateEndParse[i] = new Date(year[i] + "-" + month[i] + "-" + date[i] + "T" + endTime[i])
+            // Extract date and time information using Date object
+            var startDate = new Date(repositories.items[i].start.dateTime);
+            var endDate = new Date(repositories.items[i].end.dateTime);
+            
+            // Always set default Zoom details (hardcoded)
+            zoomLink[i] = "https://us06web.zoom.us/j/82222609862?pwd=3JibKpZ9HZDDuRbamgnLnTyZej2EZG.1";
+            zoomID[i] = "82222609862";
+            passcode[i] = "123456";
+            
+            // Check if description is available and is a string
+            if (repositories.items[i].description && typeof repositories.items[i].description === 'string') {
+                description[i] = repositories.items[i].description;
+            }
+            
+            htmlLink[i] = repositories.items[i].htmlLink;
+            year[i] = startDate.getFullYear();
+            month[i] = (startDate.getMonth() + 1).toString().padStart(2, '0'); // Ensure month is two digits
+            date[i] = startDate.getDate().toString().padStart(2, '0'); // Ensure date is two digits
+            startTime[i] = startDate.toTimeString().slice(0, 5);
+            endTime[i] = endDate.toTimeString().slice(0, 5);
+            startTimeWithoutColon[i] = startTime[i].replace(':', '');
+            // Use startDate and endDate variables to simplify code
+            dateParse[i] = startDate;
+            dateEndParse[i] = endDate;
 
             // Find skylight
             if (dateParse[i].getHours() < 12){
@@ -293,10 +333,9 @@ li {
 
 
             venue[i] = repositories.items[i].location
-            // const temp = zoomLink[i].split("")
-            // zoomID[i] = temp[26] + temp[27] + temp[28] + temp[29] + temp[30] + temp[31] + temp[32] + temp[33] + temp[34] + temp[35] + temp[36];
 
             // Find if it's hybrid or online-only
+            let isHybrid;
             if (venue[i].includes("Sigma")){
                 isHybrid = " (Hybrid) "
             }
@@ -335,21 +374,39 @@ li {
             console.log("dateResult: " + dateResult[i])
             console.log("") // Space
 
-            str += "<li><a href= '" + htmlLink[i] + "' target='_blank' >" + futureDates[i] + "</a>";
+            // Create simplified list item with just date/time and venue
+            str += "<li><a href='" + htmlLink[i] + "' target='_blank'>" + futureDates[i] + "</a>";
+            str += "<br><em>Venue: " + venue[i] + "</em></li>";
 
 
 
         }
 
-        console.log(url)
+        console.log("Calendar API URL:", "https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events");
         timeLink = timeFrontLink + year[0] + month[0] + date[0] + "T" + startTimeWithoutColon[0] + timeBackLink;
-        // dateResult.forEach(function(date) {
-        //     str += '<li>'+ date + '';
-        // });
         str += '</ul>';
         document.getElementById("futureDates").innerHTML = str;
-
-
+            } catch (error) {
+                console.error('Error processing calendar data:', error);
+                // Show fallback content when API fails
+                document.getElementById("futureDates").innerHTML = "<p>Unable to load meeting schedule. Please check our <a href='https://cyberjaya.toastmastersclubs.org/'>homepage</a> or contact club officers for upcoming meetings.</p>";
+                // Hide zoom info section when there's an error
+                document.getElementById("zoomInfo").style.display = "none";
+            }
+        };
+        
+        // Load the calendar data using JSONP
+        const script = document.createElement('script');
+        const url = "https://www.googleapis.com/calendar/v3/calendars/p75em956e3b5r49tdpivg9ag2c%40group.calendar.google.com/events?orderBy=startTime&singleEvents=true&timeMin=" + dateNow + "&key=AIzaSyD0MLoDZ5TrzaADlMvRAhCioqaDgQghaKk&callback=handleMeetingsCalendarResponse";
+        script.src = url;
+        script.onerror = function() {
+            console.error('Failed to load calendar data');
+            // Show fallback content
+            document.getElementById("futureDates").innerHTML = "<p>Unable to load meeting schedule. Please check our <a href='https://cyberjaya.toastmastersclubs.org/'>homepage</a> or contact club officers for upcoming meetings.</p>";
+            // Hide zoom info section when there's an error
+            document.getElementById("zoomInfo").style.display = "none";
+        };
+        document.head.appendChild(script);
     })();
 
 
