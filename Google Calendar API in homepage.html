@@ -168,37 +168,17 @@ a:active {
             var startDate = new Date(repositories.items[i].start.dateTime);
             var endDate = new Date(repositories.items[i].end.dateTime);
             description[i] = repositories.items[i].description;
+            // Always set default Zoom details (hardcoded)
+            zoomLink[i] = "https://us06web.zoom.us/j/82222609862?pwd=3JibKpZ9HZDDuRbamgnLnTyZej2EZG.1";
+            zoomID[i] = "82222609862";
+            passcode[i] = "123456";
+            
             // Check if description is available and is a string
             if (repositories.items[i].description && typeof repositories.items[i].description === 'string') {
                 description[i] = repositories.items[i].description;
-
-                // Regex to find the Zoom link (updated for new format)
-                // var zoomLinkRegex = /https?:\/\/us\d+web\.zoom\.us\/j\/\d+\?pwd=[\w.]+/;
-                // var zoomLinkMatch = description[i].match(zoomLinkRegex);
-                // if (zoomLinkMatch) {
-                //     zoomLink[i] = zoomLinkMatch[0];
-                // }
-
-                // // Regex to find the Meeting ID
-                // var zoomIDRegex = /Meeting ID: (\d{3} \d{4} \d{4})/;
-                // var zoomIDMatch = description[i].match(zoomIDRegex);
-                // if (zoomIDMatch) {
-                //     zoomID[i] = zoomIDMatch[1].replace(/\s/g, ''); // Remove spaces
-                // }
-
-                // // Regex to find the Passcode
-                // var passcodeRegex = /Passcode: (\d+)/;
-                // var passcodeMatch = description[i].match(passcodeRegex);
-                // if (passcodeMatch) {
-                //     passcode[i] = passcodeMatch[1];
-                // }
                 
-                // Hardcode Zoom details
-                zoomLink[i] = "https://us06web.zoom.us/j/82222609862?pwd=3JibKpZ9HZDDuRbamgnLnTyZej2EZG.1";
-                zoomID[i] = "82222609862";
-                passcode[i] = "123456";
-            } else {
-                console.error('Description is not available or not a string for item index:', i);
+                // Note: Dynamic extraction of Zoom details from description is commented out
+                // If you want to use dynamic extraction in the future, uncomment the regex code above
             }
             year[i] = startDate.getFullYear();
             month[i] = (startDate.getMonth() + 1).toString().padStart(2, '0'); // Ensure month is two digits
